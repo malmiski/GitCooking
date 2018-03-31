@@ -14,7 +14,7 @@ export default class GetCookingHomeScreen extends React.Component{
                 </RefreshControl>}>
                 <Image source={{uri : "https://pc-tablet.com/wp-content/uploads/2016/12/New-Year-2017-images-videos.jpg"}} 
                 style={{ flex: 1, height: 400}} />
-                <View style={{backgroundColor: "orange", margin: 30, height: 400}} />
+                <View style={{backgroundColor: "yellow", margin: 30, height: 400}} />
                 <View style={{backgroundColor: "red", margin: 30, height: 400}} />
                 {/*<Image source={{uri: "https://pc-tablet.com/wp-content/uploads/2016/12/New-Year-2017-images-videos.jpg"}} />*/}
             </ScrollView>

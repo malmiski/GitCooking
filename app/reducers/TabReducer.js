@@ -6,14 +6,14 @@ export default function tabReducer(state ={selected:"HOME"}, action){
         case "HOME":
             state = {...state, selected:"HOME"};
             break;
-        case "MYSTUFF":
-            state = {...state, selected:"MYSTUFF"};
+        case "DISCOVER":
+            state = {...state, selected:"DISCOVER"};
             break;
-        case "MESSAGES":
-            state = {...state, selected:"MESSAGES"};
+        case "RECIPELOG":
+            state = {...state, selected:"RECIPELOG"};
             break;
-        case "MORE":
-            state = {...state, selected:"MORE"};
+        case "PROFILE":
+            state = {...state, selected:"PROFILE"};
             break;
     }
     return state;

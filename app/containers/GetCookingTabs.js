@@ -9,7 +9,7 @@ import navigators from "./Navigators";
 import { connect } from "react-redux"
 import switchTab from "../actions/SwitchTabs";
 import refreshHome from "../actions/RefreshHome";
-import retrieveMessages from "../actions/RetrieveMessages";
+import retrieveProfile from "../actions/RetrieveProfile";
 import retrieveStuff from "../actions/RetrieveStuff";
 const Icon = <Foundation name="home" size={24} color="white"/>;
 
@@ -43,31 +43,31 @@ class GetCookingTabs extends React.Component{
           </TabNavigator.Item>
 
           <TabNavigator.Item
-            title={this.props.tab === "MYSTUFF" ?  "MY STUFF": " "}
+            title={this.props.tab === "DISCOVER" ?  "Discover": " "}
             renderIcon={() => <Foundation name="anchor" size={24} color="white" />}
             renderSelectedIcon={() => <Foundation name="anchor" size={24} color="hotpink" />}
-            onPress={this.props.onPress("MYSTUFF")}
-            selected={this.props.tab==="MYSTUFF"}>
-            <navigators.MyStuffNav screenProps={{retrieving: this.props.retrievingStuff, onRefresh: this.props.onStuffRefresh, stuff:this.props.stuff}}/>
+            onPress={this.props.onPress("DISCOVER")}
+            selected={this.props.tab==="DISCOVER"}>
+            <navigators.DiscoverNav screenProps={{retrieving: this.props.retrievingStuff, onRefresh: this.props.onStuffRefresh, stuff:this.props.stuff}}/>
           </TabNavigator.Item>
 
            <TabNavigator.Item
-            title={this.props.tab === "MESSAGES" ?  "MESSAGES": " "}
+            title={this.props.tab === "RECIPELOG" ?  "RECIPELOG": " "}
             renderIcon={() => <Foundation name="mail" size={24} color="white" />}
             renderSelectedIcon={() => <Foundation name="mail" size={24} color="hotpink" />}
             badgeText="1"
-            onPress={this.props.onPress("MESSAGES")}
-            selected={this.props.tab==="MESSAGES"}>
-            <navigators.MessagesNav screenProps={ {retrieving: this.props.retrieving, onRefresh:this.props.onMessageRefresh, messages:this.props.messages}}/>
+            onPress={this.props.onPress("RECIPELOG")}
+            selected={this.props.tab==="RECIPELOG"}>
+            <navigators.RecipeLogNav />
           </TabNavigator.Item>
 
           <TabNavigator.Item
-            title={this.props.tab === "MORE" ?  "MORE": " "}
-            renderIcon={() => <Feather name="more-horizontal" size={24} color="white" />}
-            renderSelectedIcon={() => <Ionicons name="ios-more" size={24} color="hotpink" />}
-            onPress={this.props.onPress("MORE")}
-            selected={this.props.tab==="MORE"}>
-            <navigators.MoreNav/>            
+            title={this.props.tab === "PROFILE" ?  "PROFILE": " "}
+            renderIcon={() => <Ionicons name="ios-person" size={24} color="white" />}
+            renderSelectedIcon={() => <Ionicons name="ios-person" size={24} color="hotpink" />}
+            onPress={this.props.onPress("PROFILE")}
+            selected={this.props.tab==="PROFILE"}>
+            <navigators.ProfileNav screenProps={ {retrieving: this.props.retrievingProfile, onRefresh:this.props.onProfileRefresh, profile:this.props.profile}}/>            
           </TabNavigator.Item>
 
        </TabNavigator>
@@ -90,8 +90,8 @@ const mapStateToProps = (state) =>{
       return {
         tab: state.tab_reducer.selected,
         refreshing: state.home_reducer.refreshing,
-        retrieving: state.messages_reducer.retrieving,
-        messages: state.messages_reducer.messages,
+        retrievingProfile: state.profile_reducer.retrieving,
+        profile: state.profile_reducer.profile,
         stuff: state.stuff_reducer.stuff,
         retrievingStuff: state.stuff_reducer.retrievingStuff,
       }
@@ -105,8 +105,8 @@ const mapDispatchToProps = (dispatch) =>{
         onRefresh: () => {
             dispatch(refreshHome());
         },
-        onMessageRefresh: ()=>{
-          dispatch(retrieveMessages());
+        onProfileRefresh: ()=>{
+          dispatch(retrieveProfile());
         },
         onStuffRefresh: ()=>{
           dispatch(retrieveStuff());

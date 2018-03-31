@@ -1,14 +1,17 @@
 import { StyleSheet, Text, View, StatusBar, Image} from 'react-native';
 import {StackNavigator} from 'react-navigation';
 import GetCookingHomeScreen from "./GetCookingHomeScreen";
-import GetCookingMoreScreen from "./GetCookingMoreScreen";
-import GetCookingMessagesScreen from "./GetCookingMessagesScreen";
+import GetCookingDiscoverScreen from "./GetCookingDiscoverScreen";
+import GetCookingRecipeLogScreen from "./GetCookingRecipeLogScreen";
 import InfoScreen from "./InfoScreen";
-import GetCookingMyStuffScreen from "./GetCookingMyStuffScreen";
-import MessageView from "./MessageView";
+import GetCookingProfileScreen from "./GetCookingProfileScreen";
+import RecipeView from "./RecipeView";
 import React from "react";
 import {Feather} from "@expo/vector-icons";
 const navigators = {};
+/**
+ * These are the various screens for each view in the tab bar
+ */
 navigators.HomeNav = StackNavigator({Home: {screen:  GetCookingHomeScreen,
     navigationOptions: {
       title: `Home`,
@@ -16,22 +19,24 @@ navigators.HomeNav = StackNavigator({Home: {screen:  GetCookingHomeScreen,
     headerStyle: {backgroundColor: "black", borderColor: "white", borderBottomWidth: 2},
     },
 }});
-navigators.MyStuffNav = StackNavigator({Home: {screen:  GetCookingMyStuffScreen,
+
+navigators.DiscoverNav = StackNavigator({Home: {screen:  GetCookingDiscoverScreen,
     navigationOptions: {
       title: `Back`,
     headerTitle: ()=>{return <Text style={{color: "white", fontWeight: "900"}}>My Stuff</Text>},
     headerStyle: {backgroundColor: "black", borderColor: "white", borderBottomWidth: 2},
     },
 }});
-navigators.MessagesNav = StackNavigator({
-  Home: {screen:  GetCookingMessagesScreen,
+
+navigators.RecipeLogNav = StackNavigator({
+  Home: {screen:  GetCookingRecipeLogScreen,
     navigationOptions: {
       title: `Messages`,
     headerTitle: ()=>{return <Text style={{color: "white", fontWeight: "900"}}>Messages</Text>},
     headerStyle: {backgroundColor: "black", borderColor: "white", borderBottomWidth: 2},
     },
   },
-  Message: {screen: MessageView, navigationOptions: ({navigation}) => {
+  Message: {screen: RecipeView, navigationOptions: ({navigation}) => {
     console.log(Object.keys(navigation.state.params));
     return {
       title: `Is the way`,
@@ -41,12 +46,12 @@ navigators.MessagesNav = StackNavigator({
 } 
 
 });
-navigators.MoreNav = StackNavigator(
+navigators.ProfileNav = StackNavigator(
   {
     Home: {
-      screen:  GetCookingMoreScreen,
+      screen:  GetCookingProfileScreen,
       navigationOptions: {
-        title: `More`,
+        title: ``,
         headerTitle: ()=>{return <Text style={{color: "white", fontWeight: "900"}}>More</Text>},
         headerStyle: {backgroundColor: "black", borderColor: "white", borderBottomWidth: 2},
       },

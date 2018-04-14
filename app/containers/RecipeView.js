@@ -10,7 +10,7 @@ export default class RecipeView extends React.Component{
     render(){
         return (
             <View style={{}}>
-                <Image source={this.props.image}/>
+                <Image source={this.props.uri}/>
             </View>
         );
 

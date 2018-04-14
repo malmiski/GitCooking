@@ -9,6 +9,7 @@ import GetCookingProfileScreen from "./GetCookingProfileScreen";
 import RecipeView from "./RecipeView";
 import React from "react";
 import RecipeList from "./RecipeList"
+import FriendList from "./FriendList"
 import {Feather} from "@expo/vector-icons";
 const navigators = {};
 /**
@@ -59,25 +60,7 @@ navigators.ProfileNav = StackNavigator(
       },
     },
     RecipeList: {screen: RecipeList, navigationOptions: {},},
-    RulesScreen: {screen: View,       navigationOptions: ({navigation}) => ({
-        title: `Rules`,
-        headerTitle: ()=>{return <Text style={{color: "white", fontWeight: "900"}}>Rules</Text>},
-        headerStyle: {backgroundColor: "black", borderColor: "white", borderBottomWidth: 2},
-        headerLeft: <Feather style={{marginLeft: 10}} name="arrow-left" size={30} color="white" onPress={() => {navigation.goBack(undefined)}} />
-      }),
-},
-    SettingsScreen: {screen: View,       navigationOptions: ({navigation}) => ({
-        title: `Settings`,
-        headerTitle: ()=>{return <Text style={{color: "white", fontWeight: "900"}}>Settings</Text>},
-        headerStyle: {backgroundColor: "black", borderColor: "white", borderBottomWidth: 2},
-        headerLeft: <Feather style={{marginLeft: 10}} name="arrow-left" size={30} color="white" onPress={() => {navigation.goBack(undefined)}} />
-      }),
-},
-    LoginToggleScreen: {screen: View,       navigationOptions: ({navigation}) => ({
-        title: `More`,
-        headerTitle: ()=>{return <Text style={{color: "white", fontWeight: "900"}}>More</Text>},
-        headerStyle: {backgroundColor: "black", borderColor: "white", borderBottomWidth: 2},
-      }),
-}
+    FriendList: {screen: FriendList, navigationOptions: {},},
+    RecipeView: {screen: RecipeView, navigationOptions: {},}
   });
 export default navigators;

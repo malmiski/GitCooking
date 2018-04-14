@@ -49,7 +49,7 @@ class GetCookingProfileScreen extends React.Component {
                                 <Button onPress={()=>{}} title="Saved" style={{width: 100, height: 100}}>Saved</Button>
                             </View>
                             <View style={{width: 100, height: 100 }}>
-                                <Button onPress={()=>{}} title="Friends" style={{alignSelf: "stretch", width: 100, height: 100}}>Friends</Button>
+                                <Button onPress={()=>{this.props.navigation.navigate("FriendList", {id: userid})}} title="Friends" style={{alignSelf: "stretch", width: 100, height: 100}}>Friends</Button>
                             </View>
                         </View>
                     </View>

@@ -1,6 +1,6 @@
 import React from "react";
 import { StyleSheet, Text, View, StatusBar, Image, ScrollView, RefreshControl} from 'react-native';
-export default class MessageView extends React.Component{
+export default class RecipeView extends React.Component{
     constructor(props){
         super(props);
     }
@@ -10,9 +10,7 @@ export default class MessageView extends React.Component{
     render(){
         return (
             <View style={{}}>
-                <Text>
-                    
-                </Text>
+                <Image source={this.props.image}/>
             </View>
         );
 

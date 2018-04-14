@@ -9,7 +9,7 @@ export default function retrieveProfile(){
                 dispatch(notifyDoneRetrieving({
                     userid: 100, 
                     username: "Jack", 
-                    userimage:"https://upload.wikimedia.org/wikipedia/commons/9/9f/Red_Onion_on_White.JPG",
+                    userimage:"http://cdn.lightgalleries.net/4bd5ec190c893/images/Rutgers_University_student_portrait_865-1.jpg",
                     log:[{
                         date: "2017-09-03",
                         meals: [{mealid: 56, name:"fried-chicken"}, {mealid: 57, name:"turkey"} ,{mealid: 58, name:"casserole"}],

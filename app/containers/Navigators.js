@@ -4,9 +4,11 @@ import GetCookingHomeScreen from "./GetCookingHomeScreen";
 import GetCookingDiscoverScreen from "./GetCookingDiscoverScreen";
 import GetCookingRecipeLogScreen from "./GetCookingRecipeLogScreen";
 import InfoScreen from "./InfoScreen";
+// import 
 import GetCookingProfileScreen from "./GetCookingProfileScreen";
 import RecipeView from "./RecipeView";
 import React from "react";
+import RecipeList from "./RecipeList"
 import {Feather} from "@expo/vector-icons";
 const navigators = {};
 /**
@@ -15,8 +17,8 @@ const navigators = {};
 navigators.HomeNav = StackNavigator({Home: {screen:  GetCookingHomeScreen,
     navigationOptions: {
       title: `Home`,
-    headerTitle: ()=>{return <Image source={require('../assets/tmobile-logo.png')} style={{width: 100, height: 58}}/>},
-    headerStyle: {backgroundColor: "black", borderColor: "white", borderBottomWidth: 2},
+    headerTitle: ()=>{return  <Text style={{color: "#dfdfdf", fontSize: 24, marginLeft:5, fontWeight:"bold"}}>GetCooking</Text>},//<Image source={require('../assets/tmobile-logo.png')} style={{width: 100, height: 58}}/>},
+    headerStyle: {backgroundColor: "blue", borderColor: "white", borderBottomWidth: 2},
     },
 }});
 
@@ -52,17 +54,11 @@ navigators.ProfileNav = StackNavigator(
       screen:  GetCookingProfileScreen,
       navigationOptions: {
         title: ``,
-        headerTitle: ()=>{return <Text style={{color: "white", fontWeight: "900"}}>More</Text>},
+        headerTitle: ()=>{return <Text style={{alignContent: "center", color: "white", fontWeight: "900"}}>Profile</Text>},
         headerStyle: {backgroundColor: "black", borderColor: "white", borderBottomWidth: 2},
       },
     },
-    InfoScreen: {screen: InfoScreen,      navigationOptions: ({navigation}) => ({
-        title: `Info`,
-        headerTitle: ()=>{return <Text style={{color: "white", fontWeight: "900"}}>Info</Text>},
-        headerStyle: {backgroundColor: "black", borderColor: "white", borderBottomWidth: 2},
-        headerLeft: <Feather style={{marginLeft: 10}} name="arrow-left" size={30} color="white" onPress={() => {navigation.goBack(undefined)}} />
-      }),
-},
+    RecipeList: {screen: RecipeList, navigationOptions: {},},
     RulesScreen: {screen: View,       navigationOptions: ({navigation}) => ({
         title: `Rules`,
         headerTitle: ()=>{return <Text style={{color: "white", fontWeight: "900"}}>Rules</Text>},

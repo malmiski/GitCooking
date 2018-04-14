@@ -35,7 +35,7 @@ class GetCookingTabs extends React.Component{
           <TabNavigator.Item
             title={this.props.tab === "HOME" ?  "HOME": " "}
             renderIcon={() => <Feather name="home" size={24} color="white" />}
-            renderSelectedIcon={() => <Foundation name="home" size={24} color="hotpink" />}
+            renderSelectedIcon={() => <Foundation name="home" size={24} color="orange" />}
             onPress={this.props.onPress('HOME')}
             selected={this.props.tab === "HOME"}
             >
@@ -45,7 +45,7 @@ class GetCookingTabs extends React.Component{
           <TabNavigator.Item
             title={this.props.tab === "DISCOVER" ?  "Discover": " "}
             renderIcon={() => <Foundation name="anchor" size={24} color="white" />}
-            renderSelectedIcon={() => <Foundation name="anchor" size={24} color="hotpink" />}
+            renderSelectedIcon={() => <Foundation name="anchor" size={24} color="orange" />}
             onPress={this.props.onPress("DISCOVER")}
             selected={this.props.tab==="DISCOVER"}>
             <navigators.DiscoverNav screenProps={{retrieving: this.props.retrievingStuff, onRefresh: this.props.onStuffRefresh, stuff:this.props.stuff}}/>
@@ -54,7 +54,7 @@ class GetCookingTabs extends React.Component{
            <TabNavigator.Item
             title={this.props.tab === "RECIPELOG" ?  "RECIPELOG": " "}
             renderIcon={() => <Foundation name="mail" size={24} color="white" />}
-            renderSelectedIcon={() => <Foundation name="mail" size={24} color="hotpink" />}
+            renderSelectedIcon={() => <Foundation name="mail" size={24} color="orange" />}
             badgeText="1"
             onPress={this.props.onPress("RECIPELOG")}
             selected={this.props.tab==="RECIPELOG"}>
@@ -64,7 +64,7 @@ class GetCookingTabs extends React.Component{
           <TabNavigator.Item
             title={this.props.tab === "PROFILE" ?  "PROFILE": " "}
             renderIcon={() => <Ionicons name="ios-person" size={24} color="white" />}
-            renderSelectedIcon={() => <Ionicons name="ios-person" size={24} color="hotpink" />}
+            renderSelectedIcon={() => <Ionicons name="ios-person" size={24} color="orange" />}
             onPress={this.props.onPress("PROFILE")}
             selected={this.props.tab==="PROFILE"}>
             <navigators.ProfileNav screenProps={ {retrieving: this.props.retrievingProfile, onRefresh:this.props.onProfileRefresh, profile:this.props.profile}}/>            
@@ -79,9 +79,9 @@ class GetCookingTabs extends React.Component{
 
 const style = StyleSheet.create({
   tabBar:{
-  backgroundColor: "black",
+  backgroundColor: "blue",
   borderTopWidth: 1,
-  borderColor: "gray"
+  borderColor: "white"
   },
 
 });

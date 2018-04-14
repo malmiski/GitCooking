@@ -6,7 +6,7 @@ export default class GetCookingHomeScreen extends React.Component{
     }
     render(){
         return (
-            <ScrollView style={{flex: 1, marginTop: 0, backgroundColor: "black"}} 
+            <ScrollView style={{flex: 1, marginTop: 0, backgroundColor: "#EFEFEF"}} 
             refreshControl={
                 <RefreshControl
                 refreshing={this.props.screenProps.refreshing}

@@ -61,6 +61,7 @@ navigators.ProfileNav = StackNavigator(
     },
     RecipeList: {screen: RecipeList, navigationOptions: {},},
     FriendList: {screen: FriendList, navigationOptions: {},},
-    RecipeView: {screen: RecipeView, navigationOptions: {},}
+    RecipeView: {screen: RecipeView, navigationOptions: {},},
+    FriendView: {screen: FriendView, navigationOptions: {},}
   });
 export default navigators;

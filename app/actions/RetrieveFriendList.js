@@ -7,10 +7,10 @@ export default function retrieveFriendList(userid=100){
         // then(response => response.json(), error => console.log("wassup", error)).then( json => {
         then( ()=>{
             dispatch(notifyDoneRetrieving([
-                        {name: "John", status: "offline", key:123, imageURI:"https://static01.nyt.com/images/2017/03/24/dining/24COOKING-CLASSICPANCAKES/24COOKING-CLASSICPANCAKES-articleLarge.jpg"},
-                        {name: "Ben", status: "offline", key:234, imageURI:"https://mykitchenkohl.files.wordpress.com/2011/07/100_8674.jpg?w=768"},
-                        {name: "Sarah", status: "online", key:345, imageURI:"https://x9wsr1khhgk5pxnq1f1r8kye-wpengine.netdna-ssl.com/wp-content/uploads/Scrambled-with-Milk-930x620.jpg" },
-                        {name: "Julie", status: "offline", key:456, imageURI:"https://x9wsr1khhgk5pxnq1f1r8kye-wpengine.netdna-ssl.com/wp-content/uploads/Scrambled-with-Milk-930x620.jpg" }
+                        {name: "John", status: "offline", key:123, imageURI:"https://images.pexels.com/photos/936099/pexels-photo-936099.jpeg"},
+                        {name: "Ben", status: "offline", key:234, imageURI:"https://images.pexels.com/photos/769768/pexels-photo-769768.jpeg"},
+                        {name: "Sarah", status: "online", key:345, imageURI:"https://images.pexels.com/photos/41533/beautiful-face-female-girl-41533.jpeg" },
+                        {name: "Julie", status: "offline", key:456, imageURI:"https://images.pexels.com/photos/746808/pexels-photo-746808.jpeg" }
 
 
             ]))

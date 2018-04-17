@@ -19,7 +19,7 @@ class FriendList extends React.Component{
                 renderItem={({item}) => {
                     return (
                     <TouchableHighlight
-                    onPress={() => {this.props.navigation.navigate("RecipeView", {uri:item.imageURI})}}
+                    onPress={() => {this.props.navigation.navigate("FriendView", {uri:item.imageURI})}}
                     underlayColor="black">
                     <View style={{flexDirection:"row", backgroundColor: "white"}} > 
                             <Image key={item.imageURI} source={{uri:item.imageURI}} style={{marginTop: 15, marginBottom:10, width: 80, height: 80, borderRadius:40}} />

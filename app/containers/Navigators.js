@@ -7,6 +7,7 @@ import InfoScreen from "./InfoScreen";
 // import 
 import GetCookingProfileScreen from "./GetCookingProfileScreen";
 import RecipeView from "./RecipeView";
+import FriendView from "./FriendView";
 import React from "react";
 import RecipeList from "./RecipeList"
 import FriendList from "./FriendList"

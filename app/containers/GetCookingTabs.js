@@ -81,7 +81,7 @@ const style = StyleSheet.create({
   tabBar:{
   backgroundColor: "blue",
   borderTopWidth: 1,
-  borderColor: "white"
+  borderColor: "white",
   },
 
 });

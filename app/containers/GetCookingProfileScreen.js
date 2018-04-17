@@ -75,7 +75,7 @@ class GetCookingProfileScreen extends React.Component {
 
 
 }
-const mapStateToProps = (state) =>{ return {fudge:"k", log: state.profile_reducer.profile}};
+const mapStateToProps = (state) =>{ return {log: state.profile_reducer.profile}};
 const mapDispatchToProps = (dispatch) =>{ return {
     onPress: ()=>{ dispatch(retrieveProfile())}
 

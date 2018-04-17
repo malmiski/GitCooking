@@ -26,8 +26,8 @@ navigators.HomeNav = StackNavigator({Home: {screen:  GetCookingHomeScreen,
 navigators.DiscoverNav = StackNavigator({Home: {screen:  GetCookingDiscoverScreen,
     navigationOptions: {
       title: `Back`,
-    headerTitle: ()=>{return <Text style={{color: "white", fontWeight: "900"}}>My Stuff</Text>},
-    headerStyle: {backgroundColor: "black", borderColor: "white", borderBottomWidth: 2},
+    headerTitle: ()=>{return <Text style={{color: "white", fontSize:24, fontWeight: "900"}}>Discover new recipes</Text>},
+    headerStyle: {backgroundColor: "blue", borderColor: "white", borderBottomWidth: 2},
     },
 }});
 

@@ -1,52 +1,88 @@
 import React from "react";
-import { StyleSheet, Text, ListView, View, StatusBar, Image, ScrollView, RefreshControl, TouchableHighlight} from 'react-native';
-import {Entypo} from "@expo/vector-icons";
-import {TabNavigator} from "react-navigation";
-const ds = new ListView.DataSource({ rowHasChanged: (row1, row2) => row1 !== row2 })
-
-
+import { StyleSheet, Text, FlatList, View, StatusBar, Image, ScrollView, RefreshControl, TouchableHighlight} from 'react-native';
+import {Entypo, FontAwesome} from "@expo/vector-icons";
+import {Card, SearchBar} from 'react-native-elements';
+import { connect } from "react-redux"
+import retrieveNewRecipes from "../actions/RetrieveNewRecipes";
+import retrieveTopRated from "../actions/RetrieveTopRated";
+import searchRecipes from "../actions/SearchRecipes";
 class GetCookingDiscoverScreen extends React.Component{
     constructor(props){
         super(props);
     }
     componentWillMount(){
         this.props.screenProps.onRefresh();
+        this.props.retrieveNew();
+        this.props.retrieveTop();
     }
     render(){
-        const total = this.props.screenProps.stuff.length;
-        return (
-            <ListView style={{backgroundColor: "black"}}
-                      dataSource={ds.cloneWithRows(this.props.screenProps.stuff)}
-                      renderRow={(rowData, sectionId, rowId, highlighRow)=>{
-                          return(
-                              <TouchableHighlight underlayColor="gray" onPress={()=>{
-                                    this.props.navigation.navigate("Message", {messageData: rowData, title: `${parseInt(rowId)+1} out of ${total}`});
-                                  }}>
-                                 <View style={{flex: 1, flexDirection:"row", justifyContent: 'flex-start', borderBottomColor: "gray", borderBottomWidth: 1, padding: 15 }}>
-                                     <View style={{flex: 1, flexDirection: "column"}}>
-                                    <Text style={{color: "hotpink", fontWeight: "bold", fontSize:30}}>{rowData.name}</Text>
-                                    <Text style={{color: "hotpink", fontWeight: "bold"}}>{new Date().toLocaleDateString("en-US")}</Text>
-                                    <Text style={{color: "hotpink", fontWeight: "bold"}}>{rowData.company.catchPhrase}</Text>
-                                    </View>
-                                    <View style={{justifyContent: "center", alignItems: "center"}}>
-                                    <Entypo name="chevron-thin-right" size={24} color="white" style={{}} />
-                                    </View>
-                                </View>
-                                </TouchableHighlight>)
-                      }
-                      }
-                      refreshControl={<RefreshControl refreshing={this.props.screenProps.retrieving}
-                                                      onRefresh={this.props.screenProps.onRefresh}/>}
-enableEmptySections={true}                                                      
+        return (<ScrollView>
+      <SearchBar
+        onChangeText={() => this.props.search()}
+        height={50}
+        placeholder={'Search For Recipes...'}
+        autoCorrect={true}
+        padding={5}
+        returnKeyType={'search'}
+        showLoading={this.props.searching}
+      />
+
+            <FlatList
+                horizontal
+                data={this.props.results}
+                renderItem={({item}) =>{
+                    console.log(item.url);
+                    return (
+                    <Card  image={{uri: item.url}} containerStyle={{padding: 0, width:160}}
+                        onPress={()=>{this.props.navigation.navigate("RecipeView", {url: item.url})}}
+                    >
+                        <Text style={{marginBottom: 15, }}>{item.name}</Text>
+                    </Card>
+                    )
+                }}
+            />
+            <Text style={{fontSize: 28, fontWeight: "bold"}}>Top Rated Recipes <FontAwesome style={{fontSize: 28}} name="long-arrow-right"/> </Text>
+            <FlatList
+                horizontal
+                data={this.props.top_recipes}
+                renderItem={({item}) =>{
+                    console.log(item.url);
+                    return (
+                    <Card onPress={()=>{console.log("pressed")}} image={{uri: item.url}} containerStyle={{padding: 0, width:160}}>
+                        <Text style={{marginBottom: 15, }}>hello</Text>
+                    </Card>
+                    )
+                }}
             >
-                </ListView>
-        );
+                </FlatList>
+                <Text style={{fontSize: 28, fontWeight: "bold"}}>Newly Added Recipes <FontAwesome style={{fontSize: 28}} name="long-arrow-right"/> </Text>
+                <FlatList
+                horizontal
+                data={this.props.new_recipes}
+                renderItem={({item}) =>{
+                    console.log(item.url);
+                    return (
+                    <Card  image={{uri: item.url}} containerStyle={{padding: 0, width:160}}>
+                        <Text style={{marginBottom: 15, }}>hello</Text>
+                    </Card>
+                    )
+                }}
+            >
+                </FlatList>
+        </ScrollView>);
 
     }
 }
+const mapStateToProps = (state) =>{ return {
+                        results: state.search_reducer.recipes,
+                        searching: state.search_reducer.retrieving,
+                        top_recipes: state.top_recipe_reducer.recipes, 
+                        new_recipes: state.new_recipe_reducer.recipes,
+                        }};
+const mapDispatchToProps = (dispatch) =>{ return {
+    search: (query)=> {dispatch(searchRecipes(query))},
+    retrieveTop: ()=>{dispatch(retrieveTopRated())},
+    retrieveNew: ()=>{dispatch(retrieveNewRecipes())}
+    }}
 
-export default TopTab = TabNavigator({
-    Expired: { screen: GetCookingDiscoverScreen},
-    Available: { screen: GetCookingDiscoverScreen}
-
-}, {tabBarPosition: "top", tabBarStyle:{backgroundColor: "black"}});
+export default connect(mapStateToProps, mapDispatchToProps)(GetCookingDiscoverScreen);

@@ -15,11 +15,26 @@ import {
 // centered, palevioletred and sized at 1.5em
 
 const store = createStore(reducers, applyMiddleware(thunkMiddleware));
+import {Font, AppLoading} from "expo";
+import FontAwesome from './node_modules/@expo/vector-icons/fonts/FontAwesome.ttf';
+
+
+import MaterialIcons from './node_modules/@expo/vector-icons/fonts/MaterialIcons.ttf';
+
+
 export default class App extends React.Component {
-
-  onPressButton(){
-
-  }
+  state = {    fontLoaded: false  };
+  async componentWillMount() {
+    try {
+      await Font.loadAsync({
+        FontAwesome,
+        MaterialIcons
+      });
+      this.setState({ fontLoaded: true });
+    } catch (error) {
+      console.log('error loading icon fonts', error);
+    }
+  }  
   render() {
     const Title = styled.Text`
       font-size: 20;
@@ -35,6 +50,9 @@ export default class App extends React.Component {
       justify-content: center;
     `;
 
+    if (!this.state.fontLoaded) {
+      return <AppLoading />;
+    }
     return (
         <Wrapper>
         <StatusBar barStyle="light-content" />

@@ -27,7 +27,7 @@ class FriendList extends React.Component{
                             <Text style={{fontSize: 20, color: "#1F1F1F"}}>{item.name}</Text> 
                             <Text style={{fontSize: 15, color: "#BBB", fontStyle:"italic"}}>Status: {item.status}</Text>
                             </View> 
-                            <View style={{justifyContent: "center", alignItems: "center"}}>
+                            <View style={{position: "absolute", right: 0, top: 40,justifyContent: "center", alignItems: "center"}}>
                                     <Entypo name="chevron-thin-right" size={24} color="black" style={{}} />
                             </View>
                     </View>

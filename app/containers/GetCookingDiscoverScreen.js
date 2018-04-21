@@ -49,13 +49,13 @@ class GetCookingDiscoverScreen extends React.Component{
                     console.log(item.url);
                     return (
                     <Card onPress={()=>{console.log("pressed")}} image={{uri: item.url}} containerStyle={{padding: 0, width:160}}>
-                        <Text style={{marginBottom: 15, }}>hello</Text>
+                        <Text style={{marginBottom: 15, }}>{item.name}</Text>
                     </Card>
                     )
                 }}
             >
                 </FlatList>
-                <Text style={{fontSize: 28, fontWeight: "bold"}}>Newly Added Recipes <FontAwesome style={{fontSize: 28}} name="long-arrow-right"/> </Text>
+                <Text style={{fontSize: 28, fontWeight: "bold"}}>Recommended for you <FontAwesome style={{fontSize: 28}} name="long-arrow-right"/> </Text>
                 <FlatList
                 horizontal
                 data={this.props.new_recipes}
@@ -63,7 +63,7 @@ class GetCookingDiscoverScreen extends React.Component{
                     console.log(item.url);
                     return (
                     <Card  image={{uri: item.url}} containerStyle={{padding: 0, width:160}}>
-                        <Text style={{marginBottom: 15, }}>hello</Text>
+                        <Text style={{marginBottom: 15, }}>{item.name}</Text>
                     </Card>
                     )
                 }}

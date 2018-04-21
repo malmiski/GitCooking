@@ -19,7 +19,7 @@ class RecipeList extends React.Component{
                 renderItem={({item}) => {
                     return (
                     <TouchableHighlight
-                    onPress={() => {this.props.navigation.navigate("RecipeView", {uri:item.imageURI})}}
+                    onPress={() => {this.props.navigation.navigate("RecipeView", {uri:item.imageURI, title: item.name})}}
                     underlayColor="black">
                     <View style={{flexDirection:"row", backgroundColor: "white"}} > 
                             <Image key={item.imageURI} source={{uri:item.imageURI}} style={{marginTop: 15, marginBottom:10, width: 80, height: 80, borderRadius:40}} />
@@ -27,7 +27,7 @@ class RecipeList extends React.Component{
                             <Text style={{fontSize: 20, color: "#1F1F1F"}}>{item.name}</Text> 
                             <Text style={{fontSize: 15, color: "#BBB", fontStyle:"italic"}}>Estimated Cooktime: {item.cookTime}</Text>
                             </View> 
-                            <View style={{justifyContent: "center", alignItems: "center"}}>
+                            <View style={{position: "absolute", right: 0, top: 40, justifyContent: "center", alignItems: "center"}}>
                                     <Entypo name="chevron-thin-right" size={24} color="black" style={{}} />
                             </View>
                     </View>

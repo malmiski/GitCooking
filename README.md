@@ -19,6 +19,9 @@ need to add
 ## The Team
 
 Mohanad Almiski
+
 Layanne Hazim
+
 Sean Scott
+
 Nathan McKinley-Pace

@@ -3,8 +3,7 @@ import {StackNavigator} from 'react-navigation';
 import GetCookingHomeScreen from "./GetCookingHomeScreen";
 import GetCookingDiscoverScreen from "./GetCookingDiscoverScreen";
 import GetCookingRecipeLogScreen from "./GetCookingRecipeLogScreen";
-import InfoScreen from "./InfoScreen";
-// import 
+
 import GetCookingProfileScreen from "./GetCookingProfileScreen";
 import RecipeView from "./RecipeView";
 import FriendView from "./FriendView";
@@ -13,6 +12,7 @@ import RecipeList from "./RecipeList"
 import FriendList from "./FriendList"
 import {Feather} from "@expo/vector-icons";
 const navigators = {};
+
 /**
  * These are the various screens for each view in the tab bar
  */
@@ -42,10 +42,9 @@ navigators.DiscoverNav = StackNavigator({Home: {screen:  GetCookingDiscoverScree
 navigators.RecipeLogNav = StackNavigator({
   Home: {screen:  GetCookingRecipeLogScreen,
     navigationOptions: {
-      title: `Messages`,
-    headerTitle: ()=>{return <Text style={{color: "white", fontWeight: "900"}}>Messages</Text>},
-    headerStyle: {backgroundColor: "black", borderColor: "white", borderBottomWidth: 2},
-    },
+      headerTitle: ()=>{return <Text style={{alignContent: "center", color: "white", fontSize:24,fontWeight: "900"}}>My Log</Text>},
+      headerStyle: {backgroundColor: "blue", borderColor: "white", borderBottomWidth: 2},
+  },
   },
   RecipeView: {screen: RecipeView, navigationOptions: ({navigation}) => {
     console.log(Object.keys(navigation.state.params));

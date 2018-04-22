@@ -13,6 +13,8 @@ import {
 } from 'react-native';
 import { connect } from "react-redux"
 import retrieveProfile from "../actions/RetrieveProfile";
+import {Card} from "react-native-elements";
+import StarRating from "react-native-star-rating";
 
 class GetCookingProfileScreen extends React.Component {
     componentWillMount(){
@@ -24,7 +26,6 @@ class GetCookingProfileScreen extends React.Component {
         const image = this.props.screenProps.profile.userimage;
         const name = this.props.screenProps.profile.username;
         const userid = this.props.screenProps.profile.userid;
-        console.log(this.props.log);
         return (
             <ScrollView style={{ flex: 1, marginTop: 0, backgroundColor: "seashell" }}
                 scrollEnabled={true} 
@@ -57,17 +58,44 @@ class GetCookingProfileScreen extends React.Component {
 
                 <View style={{ borderBottomColor: "black", borderBottomWidth: 2, margin: 10, alignContent: "center" }} />
 
-                {
-                    log.map((prop) => {
-                        return <View key={prop.date} style={{ flexDirection: "row" }}>
-                            <Text> {prop.date} </Text>
-                            <View style={{width: 1, backgroundColor: "black"}}/>
-                            <View style={{height:150}}>{
-                                prop.meals.map(({ mealid, name }) => <Text key={mealid}>{name}</Text>)
-                            }</View>
+                                        <View>
+                                        {
+                log.map((prop) => {
+                    return (
+                    <View  key={prop.key} style={{ flexDirection: "row" }}>
+                        <Text style={{fontSize:  28, fontWeight: "900", width: 56}}> {prop.date} </Text>
+                        <View style={{width: 1, backgroundColor: "black"}}/>
+                        <View>
+                        {
+                            prop.meals.map((item) =>{
+                                return ( 
+                                    <View key={item.key}>
+                                        <View style={{flexDirection: "row"}}>
+                                            <Image source={{uri: image}} style={{ width: 40, height: 40, borderRadius: 20, }} />
+                                            <Text>{name}</Text>
+                                        </View> 
+                                        <Text> {item.name} </Text>
+                                        <Card image={{uri: item.image}} containerStyle={{padding: 0, width:280}}>
+                                        <StarRating
+                                            disabled={true}
+                                            maxStars={5}
+                                            rating={item.rating}
+                                            selectedStar={(rating) => console.log(rating)}
+                                        />
+
+                                        </Card>
+                                    </View>
+                                )
+                            }
+                            )
+                        }
                         </View>
-                    })
-                }
+                    </View>)
+                })
+            }
+
+                        </View>
+
             </ScrollView>
         );
 

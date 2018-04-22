@@ -8,7 +8,6 @@ function requestRefreshHome(){
 }
 
 function doneRefreshing(json={}){
-    console.log(json);
         return {
             type: "REFRESH_HOME",
             refreshing: false,

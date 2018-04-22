@@ -7,7 +7,6 @@ import StarRating from "react-native-star-rating";
 class GetCookingHomeScreen extends React.Component{
     constructor(props){
         super(props)
-        console.log(props);
         this.props.timeline();
     }
     componentWillMount(){
@@ -36,7 +35,7 @@ class GetCookingHomeScreen extends React.Component{
                                         <Text> {item.name} </Text>
                                         <Card image={{uri: item.image}} containerStyle={{padding: 0, width:280}}>
                                         <StarRating
-                                            disabled={true}
+                                            disabled={false}
                                             maxStars={5}
                                             rating={item.rating}
                                             selectedStar={(rating) => console.log(rating)}

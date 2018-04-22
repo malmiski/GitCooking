@@ -1,8 +1,6 @@
-export default function switchTab(tab="HOME"){
+export default function switchTab(tab="DISCOVER"){
         return {
             type: "CHANGE_TAB",
             payload: tab
-
         }
-
 }

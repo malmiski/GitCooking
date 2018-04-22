@@ -2,6 +2,9 @@ import React from "react";
 import { StyleSheet, Text, View, StatusBar, Image, ScrollView, RefreshControl, FlatList, TouchableHighlight} from 'react-native';
 import {Card, Button,} from "react-native-elements";
 import retrieveRecipes from "../actions/RetrieveRecipeList";
+import StarRating from "react-native-star-rating";
+import {connect} from "react-redux";
+import updateRating from "../actions/UpdateRating";
 var styles = StyleSheet.create({
 
     container: {
@@ -16,7 +19,7 @@ var styles = StyleSheet.create({
 
 
 });
-export default class RecipeView extends React.Component{
+class RecipeView extends React.Component{
     constructor(props){
         super(props);
     }
@@ -40,8 +43,25 @@ export default class RecipeView extends React.Component{
                        <Button onPress={()=>{}} title="Save" style={{width: 100, height: 100}}>Saved</Button>
                     </View> 
                     </View>
+                    <View>
+                    <StarRating
+                            disabled={false}
+                            maxStars={5}
+                            rating={this.props.rating}
+                            selectedStar={(rating) => this.props.updateRating(rating)}
+                            />
+
+                    </View>
                 </View>
               </ScrollView>
         );
     }
 }
+
+const mapStateToProps = (state) =>{ return {rating: state.rating_reducer.rating}};
+const mapDispatchToProps = (dispatch) =>{ return {
+    updateRating: (value)=>{dispatch(updateRating(value))},
+    }
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(RecipeView);

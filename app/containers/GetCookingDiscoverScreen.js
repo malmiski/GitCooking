@@ -47,7 +47,9 @@ class GetCookingDiscoverScreen extends React.Component{
                 data={this.props.top_recipes}
                 renderItem={({item}) =>{
                     return (
-                    <Card onPress={()=>{console.log("pressed")}} image={{uri: item.url}} containerStyle={{padding: 0, width:160}}>
+                    <Card 
+                    onPress={()=>{this.props.navigation.navigate("RecipeView", {uri: item.url})}}
+                    image={{uri: item.url}} containerStyle={{padding: 0, width:160}}>
                         <Text style={{marginBottom: 15, }}>{item.name}</Text>
                     </Card>
                     )
@@ -65,7 +67,10 @@ class GetCookingDiscoverScreen extends React.Component{
                 data={this.props.new_recipes}
                 renderItem={({item}) =>{
                     return (
-                    <Card  image={{uri: item.url}} containerStyle={{padding: 0, width:160}}>
+                    <Card  
+                           onPress={()=>{this.props.navigation.navigate("RecipeView", {uri: item.url})}}
+                           image={{uri: item.url}} 
+                           containerStyle={{padding: 0, width:160}}>
                         <Text style={{marginBottom: 15, }}>{item.name}</Text>
                     </Card>
                     )

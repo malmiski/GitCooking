@@ -16,7 +16,8 @@ const navigators = {};
 /**
  * These are the various screens for each view in the tab bar
  */
-navigators.HomeNav = StackNavigator({Home: {screen:  GetCookingHomeScreen,
+navigators.HomeNav = StackNavigator({
+  Home: {screen:  GetCookingHomeScreen,
     navigationOptions: {
       title: `Home`,
     headerTitle: ()=>{return  <Text style={{color: "#dfdfdf", fontSize: 24, marginLeft:5, fontWeight:"bold"}}>GetCooking</Text>},//<Image source={require('../assets/tmobile-logo.png')} style={{width: 100, height: 58}}/>},
@@ -37,7 +38,11 @@ navigators.DiscoverNav = StackNavigator({Home: {screen:  GetCookingDiscoverScree
     headerTitle: ()=>{return <Text style={{color: "white", fontSize:24, fontWeight: "900"}}>Discover new recipes</Text>},
     headerStyle: {backgroundColor: "blue", borderColor: "white", borderBottomWidth: 2},
     },
-}});
+    RecipeView: {screen: RecipeView, navigationOptions: {
+      headerTitle: ()=>{return  <Text style={{color: "#dfdfdf", fontSize: 24, marginLeft:5, fontWeight:"bold"}}></Text>},//<Image source={require('../assets/tmobile-logo.png')} style={{width: 100, height: 58}}/>},
+      headerStyle: {backgroundColor: "blue", borderColor: "white", borderBottomWidth: 2},    
+    }},
+  }});
 
 navigators.RecipeLogNav = StackNavigator({
   Home: {screen:  GetCookingRecipeLogScreen,

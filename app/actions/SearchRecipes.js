@@ -1,7 +1,10 @@
+import { debugging, address } from "../debugging";
+
 export default function searchRecipes(query=""){
     // Thunk will place the dispatch variable here for us
     return (dispatch) =>{
             dispatch(notifyRetrieving());
+        if(debugging){
         //fetch(`https://jsonplaceholder.typicode.com/users`).
         new Promise(resolve => {resolve()}).
         // then(response => response.json(), error => console.log("wassup", error)).then( json => {
@@ -14,6 +17,13 @@ export default function searchRecipes(query=""){
 
             ]))
             });
+        }else{
+            fetch(`${address}\\recommended`)
+            .then(response => response.json(), error => console.log("wassup", error))
+            .then( json => {
+                notifyDoneRetrieving(json);
+            })
+        }
         };
 
     }

@@ -1,6 +1,5 @@
 import React from 'react';
 import {
-    Button,
     Image,
     ListView,
     RefreshControl,
@@ -13,7 +12,7 @@ import {
 } from 'react-native';
 import { connect } from "react-redux"
 import retrieveProfile from "../actions/RetrieveProfile";
-import {Card} from "react-native-elements";
+import {    Button,    Card} from "react-native-elements";
 import StarRating from "react-native-star-rating";
 
 class GetCookingProfileScreen extends React.Component {
@@ -36,21 +35,15 @@ class GetCookingProfileScreen extends React.Component {
                         <Image source={{ uri: image == "" ? "https://pc-tablet.com/wp-content/uploads/2016/12/New-Year-2017-images-videos.jpg" : image }} style={{ width: 120, height: 120, borderRadius: 75, }} />
                         <Text >{name}</Text>
                     </View>
-                    <View>
+                    <View style={{marginTop: 50, marginRight: 40}}>
                         <View style={{ flexDirection: "row", }}>
-                            <View style={{width: 100, height: 100 }}>
-                                <Button onPress={()=>{this.props.navigation.navigate("RecipeList", {id: userid})}} title="Recipes" style={{width: 100, height: 100}}>Recipes</Button>
-                            </View>
-                            <View style={{width: 100, height: 100 }}>
-                                <Button onPress={()=>{}} title="Ratings" style={{width: 100, height: 100}}>Ratings</Button>
+                            <View style={{width: 200, height: 100 }}>
+                                <Button backgroundColor= "blue" onPress={()=>{this.props.navigation.navigate("RecipeList", {id: userid})}} title="Recipes" style={{width: 100, height: 100}}>Recipes</Button>
                             </View>
                         </View>
                         <View style={{ flexDirection: "row", }}>
-                            <View style={{width: 100, height: 100 }}>
-                                <Button onPress={()=>{}} title="Saved" style={{width: 100, height: 100}}>Saved</Button>
-                            </View>
-                            <View style={{width: 100, height: 100 }}>
-                                <Button onPress={()=>{this.props.navigation.navigate("FriendList", {id: userid})}} title="Friends" style={{alignSelf: "stretch", width: 100, height: 100}}>Friends</Button>
+                            <View style={{width: 200, height: 100 }}>
+                                <Button backgroundColor= "blue" onPress={()=>{this.props.navigation.navigate("FriendList", {id: userid})}} title="Friends" style={{alignSelf: "stretch", width: 100, height: 100}}>Friends</Button>
                             </View>
                         </View>
                     </View>

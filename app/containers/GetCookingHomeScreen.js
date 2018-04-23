@@ -33,8 +33,11 @@ class GetCookingHomeScreen extends React.Component{
                                             <Text>{item.friend}</Text>
                                         </View> 
                                         <Text> {item.name} </Text>
-                                        <Card image={{uri: item.image}} containerStyle={{padding: 0, width:280}}>
+                                        <Card image={{uri: item.image}}
+                                              containerStyle={{padding: 0, width:280}}
+                                              onPress={ ()=>this.props.navigation.navigate("RecipeView", {uri: item.image, name: item.name})}>
                                         <StarRating
+                                            style={{width: 100}}
                                             disabled={false}
                                             maxStars={5}
                                             rating={item.rating}

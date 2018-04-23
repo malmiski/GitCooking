@@ -1,7 +1,10 @@
+import { debugging, address } from "../debugging";
+
 export default function retrieveProfile(){
         // Thunk will place the dispatch variable here for us
         return (dispatch) =>{
                 dispatch(notifyRetrieving());
+            if(debugging){
             //fetch(`https://jsonplaceholder.typicode.com/users`).
             new Promise(resolve => {resolve()}).
             // then(response => response.json(), error => console.log("wassup", error)).then( json => {
@@ -11,6 +14,7 @@ export default function retrieveProfile(){
                     username: "Jack", 
                     userimage:"http://cdn.lightgalleries.net/4bd5ec190c893/images/Rutgers_University_student_portrait_865-1.jpg",
                     log:[{
+                        key: 1,
                         date: "09-03",
                         meals: [
                             {key: 56, keywords:["breading", "fried", "chicken", "meat", "protein"], 
@@ -28,6 +32,7 @@ export default function retrieveProfile(){
                         visible: true,
                     },
                     {
+                        key: 2,
                         date: "09-04",
                         meals: [
                             {key: 56, keywords:["breading", "fried", "chicken", "meat", "protein"], 
@@ -45,6 +50,7 @@ export default function retrieveProfile(){
                         visible: true,
                     },
                     {
+                        key: 3,
                         date: "09-06",
                         meals: [
                             {key: 56, keywords:["breading", "fried", "chicken", "meat", "protein"], 
@@ -64,7 +70,14 @@ export default function retrieveProfile(){
                 }));
             });
 
+        }else{
+            fetch(`${address}\\recommended`)
+            .then(response => response.json(), error => console.log("wassup", error))
+            .then( json => {
+                notifyDoneRetrieving(json);
+            })
         }
+        };
 
 }
 

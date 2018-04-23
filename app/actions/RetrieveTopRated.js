@@ -1,7 +1,10 @@
+import { debugging, address} from "../debugging";
+
 export default function retrieveTopRated(userid=100){
     // Thunk will place the dispatch variable here for us
     return (dispatch) =>{
             dispatch(notifyRetrieving());
+        if(debugging){
         //fetch(`https://jsonplaceholder.typicode.com/users`).
         new Promise(resolve => {resolve()}).
         // then(response => response.json(), error => console.log("wassup", error)).then( json => {
@@ -12,6 +15,13 @@ export default function retrieveTopRated(userid=100){
                 {key:9, name: "Tiramisu", url: "https://upload.wikimedia.org/wikipedia/commons/thumb/f/fc/Tiramisu_with_blueberries_and_raspberries%2C_July_2011.jpg/1280px-Tiramisu_with_blueberries_and_raspberries%2C_July_2011.jpg"},
             ]))
             });
+        }else{
+            fetch(`${address}\\topRated`)
+            .then(response => response.json(), error => console.log("wassup", error))
+            .then( json => {
+                notifyDoneRetrieving(json);
+            })
+        }
         };
 
     }

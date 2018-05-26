@@ -1,3 +1,4 @@
+# GitCooking
 ## Overview
 
 Learn how to cook for yourself and save money by developing a comprehensive cooking regimine. You'll first log your diet for a week to determine what foods you regularly spend too much money on. After that, the app finds similar recipes that help you learn how to make your own meals. Share your new cooking expertise with your friends by sending them recipe recommendations and pictures of your food. A great way to learn tasty, useful recipes, save money, and interact with your friends.
@@ -24,4 +25,5 @@ Layanne Hazim
 
 Sean Scott
 
-Nathan McKinley-Pace
+=======
+An application I helped to create in CS3231

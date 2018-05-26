@@ -61,6 +61,8 @@ class GetCookingProfileScreen extends React.Component {
                         <View>
                         {
                             prop.meals.map((item) =>{
+                                var rating = item.rating;
+                                if(item.key == 56 && this.props.rating){rating = this.props.rating}
                                 return ( 
                                     <View key={item.key}>
                                         <View style={{flexDirection: "row"}}>
@@ -72,7 +74,7 @@ class GetCookingProfileScreen extends React.Component {
                                         <StarRating
                                             disabled={true}
                                             maxStars={5}
-                                            rating={item.rating}
+                                            rating={rating}
                                             selectedStar={(rating) => console.log(rating)}
                                         />
 
@@ -96,7 +98,7 @@ class GetCookingProfileScreen extends React.Component {
 
 
 }
-const mapStateToProps = (state) =>{ return {log: state.profile_reducer.profile}};
+const mapStateToProps = (state) =>{ return {log: state.profile_reducer.profile, rating: state.rating_reducer.rating}};
 const mapDispatchToProps = (dispatch) =>{ return {
     onPress: ()=>{ dispatch(retrieveProfile())}
 

@@ -1,0 +1,558 @@
+{
+	"variables": [],
+	"info": {
+		"name": "GetCookingTests",
+		"_postman_id": "226703dc-13c0-659e-629f-743f8e6568fe",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "LogMeal",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"tests[\"Body is correct\"] = JSON.parse(responseBody) === JSON.parse(\"{success: true, userid: 150, addedMeals:[\\",
+							"    {food: 'grilled cheese', type: 'lunch', ingredients: ['cheese', 'bread'], dayno: 2, time: 'AM'], cost: 2.5}\\",
+							"    ]}\");"
+						]
+					}
+				}
+			],
+			"request": {
+				"url": {
+					"raw": "https://baneonplane.hopto.org:5007/addmeal?userid=150&food=grilled%20cheese&type=lunch&ingredients=cheese,bread&dayno=2&time=AM&cost=2.5",
+					"protocol": "https",
+					"host": [
+						"baneonplane",
+						"hopto",
+						"org"
+					],
+					"port": "5007",
+					"path": [
+						"addmeal"
+					],
+					"query": [
+						{
+							"key": "userid",
+							"value": "150",
+							"equals": true,
+							"description": ""
+						},
+						{
+							"key": "food",
+							"value": "grilled%20cheese",
+							"equals": true,
+							"description": ""
+						},
+						{
+							"key": "type",
+							"value": "lunch",
+							"equals": true,
+							"description": ""
+						},
+						{
+							"key": "ingredients",
+							"value": "cheese,bread",
+							"equals": true,
+							"description": ""
+						},
+						{
+							"key": "dayno",
+							"value": "2",
+							"equals": true,
+							"description": ""
+						},
+						{
+							"key": "time",
+							"value": "AM",
+							"equals": true,
+							"description": ""
+						},
+						{
+							"key": "cost",
+							"value": "2.5",
+							"equals": true,
+							"description": ""
+						}
+					],
+					"variable": []
+				},
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"description": "Adds a meal to the users log, that then modifies the recommended recipes for the user."
+			},
+			"response": []
+		},
+		{
+			"name": "LogMeal(2)",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"tests[\"Body is correct\"] = JSON.parse(responseBody) === JSON.parse(\"{success: true, userid: 150, addedMeals:[\\",
+							"    {food: 'spaghetti', type: 'lunch', ingredients: ['spaghetti','tomato sauce', 'lamb'], dayno: 2, time: 'AM'], cost: 4.5}\\",
+							"    ]}\");"
+						]
+					}
+				}
+			],
+			"request": {
+				"url": {
+					"raw": "https://baneonplane.hopto.org:5007/addmeal?userid=100&food=spaghetti&type=dinner&ingredients=spaghetti,tomato%20sauce,lamb&dayno=1&time=PM&cost=4.5",
+					"protocol": "https",
+					"host": [
+						"baneonplane",
+						"hopto",
+						"org"
+					],
+					"port": "5007",
+					"path": [
+						"addmeal"
+					],
+					"query": [
+						{
+							"key": "userid",
+							"value": "100",
+							"equals": true,
+							"description": ""
+						},
+						{
+							"key": "food",
+							"value": "spaghetti",
+							"equals": true,
+							"description": ""
+						},
+						{
+							"key": "type",
+							"value": "dinner",
+							"equals": true,
+							"description": ""
+						},
+						{
+							"key": "ingredients",
+							"value": "spaghetti,tomato%20sauce,lamb",
+							"equals": true,
+							"description": ""
+						},
+						{
+							"key": "dayno",
+							"value": "1",
+							"equals": true,
+							"description": ""
+						},
+						{
+							"key": "time",
+							"value": "PM",
+							"equals": true,
+							"description": ""
+						},
+						{
+							"key": "cost",
+							"value": "4.5",
+							"equals": true,
+							"description": ""
+						}
+					],
+					"variable": []
+				},
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"description": "Adds a meal to the users log, that then modifies the recommended recipes for the user."
+			},
+			"response": []
+		},
+		{
+			"name": "GetLog",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"tests[\"Body is correct\"] = JSON.parse(responseBody) === JSON.parse(\"{success: true, userid: 150, log:[\\",
+							"    {food: 'pancakes', type: 'breakfast', ingredients: ['flour', 'syrup', 'cinnamon'], dayno: 1, time: 'AM'], cost: 1.5},\\",
+							"    {food: 'grilled cheese', type: 'lunch', ingredients: ['cheese', 'bread'], dayno: 1, time: 'AM'], cost: 2.5},\\",
+							"    {food: 'steak', type: 'dinner', ingredients: ['meat', 'mashed potatoes'], dayno: 1, time: 'AM'], cost: 5.25},\\",
+							"    ]}\");"
+						]
+					}
+				}
+			],
+			"request": {
+				"url": {
+					"raw": "https://baneonplane.hopto.org:5007/getLog?userid=150",
+					"protocol": "https",
+					"host": [
+						"baneonplane",
+						"hopto",
+						"org"
+					],
+					"port": "5007",
+					"path": [
+						"getLog"
+					],
+					"query": [
+						{
+							"key": "userid",
+							"value": "150",
+							"equals": true,
+							"description": ""
+						}
+					],
+					"variable": []
+				},
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"description": "Retrieves the log for the user with the id specified."
+			},
+			"response": []
+		},
+		{
+			"name": "GetLog(2)",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"tests[\"Body is correct\"] = JSON.parse(responseBody) === JSON.parse(\"{success: true, userid: 100, log:[\\",
+							"    {food: 'Eggs', type: 'breakfast', ingredients: ['eggs',], dayno: 1, time: 'AM'], cost: 1.5},\\",
+							"    {food: 'Steak', type: 'dinner', ingredients: ['steak',], dayno: 1, time: 'PM'], cost: 2.5},\\",
+							"    {food: 'Spaghetti', type: 'dinner', ingredients: ['spaghetti'], dayno: 1, time: 'PM'], cost: 5.25},\\",
+							"    ]}\");"
+						]
+					}
+				}
+			],
+			"request": {
+				"url": {
+					"raw": "https://baneonplane.hopto.org:5007/getLog?userid=100",
+					"protocol": "https",
+					"host": [
+						"baneonplane",
+						"hopto",
+						"org"
+					],
+					"port": "5007",
+					"path": [
+						"getLog"
+					],
+					"query": [
+						{
+							"key": "userid",
+							"value": "100",
+							"equals": true,
+							"description": ""
+						}
+					],
+					"variable": []
+				},
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"description": "Retrieves the log for the user with the id specified."
+			},
+			"response": []
+		},
+		{
+			"name": "GetRecipe",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"tests[\"Body is correct\"] = JSON.parse(responseBody) === JSON.parse(\"{success: true, recipe:{\\\r",
+							"    name: 'Pancakes',\\\r",
+							"    direction: ['In a large bowl, mix flour, sugar, baking powder and salt. Make a well in the center, and pour in milk, egg and oil. Mix until smooth.',\\\r",
+							"    'Heat a lightly oiled griddle or frying pan over medium high heat. Pour or scoop the batter onto the griddle, using approximately 1/4 cup for each pancake. Brown on both sides and serve hot.'],\\\r",
+							"    ingredients:['1 cup all-purpose flour', '2 tablespoons white sugar', '2 teaspoons baking powder', '1 teaspoon salt', '1 egg, beaten', '1 cup milk', '2 tablespoons vegetable oil'],\\\r",
+							"    cookTime: 25,\\\r",
+							"    imageURI:'https://static01.nyt.com/images/2017/03/24/dining/24COOKING-CLASSICPANCAKES/24COOKING-CLASSICPANCAKES-articleLarge.jpg'}}\");"
+						]
+					}
+				}
+			],
+			"request": {
+				"url": {
+					"raw": "https://baneonplane.hopto.org:5007/getrecipe?recipeid=100",
+					"protocol": "https",
+					"host": [
+						"baneonplane",
+						"hopto",
+						"org"
+					],
+					"port": "5007",
+					"path": [
+						"getrecipe"
+					],
+					"query": [
+						{
+							"key": "recipeid",
+							"value": "100",
+							"equals": true,
+							"description": ""
+						}
+					],
+					"variable": []
+				},
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"description": "Get the ingredients, the directions, and the name of the recipe with the id specified."
+			},
+			"response": []
+		},
+		{
+			"name": "GetRecipe(2)",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"tests[\"Body is correct\"] = JSON.parse(responseBody) === JSON.parse(\"{success: true, recipe:{\\\r",
+							"    name: 'Scrambled Eggs',\\\r",
+							"    direction: ['In a large bowl, mix eggs, pepper and milk together',\\\r",
+							"    'Place onto hot pan with oil',\\\r",
+							"    'When done place cheese over eggs and fold'],\\\r",
+							"    ingredients:['eggs', 'pepper', 'cheese', '1 cup milk'],\\\r",
+							"    cookTime: 15,\\\r",
+							"    imageURI:'https://www.incredibleegg.org/wp-content/uploads/Scrambled-with-Milk-930x620.jpg'}}\");"
+						]
+					}
+				}
+			],
+			"request": {
+				"url": {
+					"raw": "https://baneonplane.hopto.org:5007/getrecipe?recipeid=102",
+					"protocol": "https",
+					"host": [
+						"baneonplane",
+						"hopto",
+						"org"
+					],
+					"port": "5007",
+					"path": [
+						"getrecipe"
+					],
+					"query": [
+						{
+							"key": "recipeid",
+							"value": "102",
+							"equals": true,
+							"description": ""
+						}
+					],
+					"variable": []
+				},
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"description": "Get the ingredients, the directions, and the name of the recipe with the id specified."
+			},
+			"response": []
+		},
+		{
+			"name": "Search",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"tests[\"Body is correct\"] = JSON.parse(responseBody) === JSON.parse(\"{success: true, searchResults:[\\",
+							"    {id: 100, recipeName: 'Pancakes', type: 'breakfast', ingredients: ['flour', 'wheat', 'syrup'], imageURI:'https://static01.nyt.com/images/2017/03/24/dining/24COOKING-CLASSICPANCAKES/24COOKING-CLASSICPANCAKES-articleLarge.jpg', cost: 2.5},\\",
+							"    {id: 120, recipeName: 'Strawberry Pancakes', type: 'breakfast', ingredients: ['flour', 'wheat', 'syrup', 'strawberries'], imageURI:'https://www.pumpkinnspice.com/wp-content/uploads/2016/11/strawberry-greek-yogurt-pancakes-4-1024x683.jpg', cost: 2.75},\\",
+							"    {id: 130, recipeName: 'Chocolate Pancakes', type: 'breakfast', ingredients: ['flour', 'wheat', 'syrup', 'chocolate chips'], imageURI:'https://bakerbynature.com/wp-content/uploads/2017/02/untitled-66-of-84-3-2.jpg', cost: 3.25},\\",
+							"    ]}\");"
+						]
+					}
+				}
+			],
+			"request": {
+				"url": {
+					"raw": "https://baneonplane.hopto.org:5007/search?query=pancakes",
+					"protocol": "https",
+					"host": [
+						"baneonplane",
+						"hopto",
+						"org"
+					],
+					"port": "5007",
+					"path": [
+						"search"
+					],
+					"query": [
+						{
+							"key": "query",
+							"value": "pancakes",
+							"equals": true,
+							"description": ""
+						}
+					],
+					"variable": []
+				},
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"description": "Searches for the specified string"
+			},
+			"response": []
+		},
+		{
+			"name": "Search(2)",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"tests[\"Body is correct\"] = JSON.parse(responseBody) === JSON.parse(\"{success: true, searchResults:[\\",
+							"    {id: 100, recipeName: 'Scrambled Eggs', type: 'breakfast', ingredients: ['eggs', 'oil', 'cheese', 'milk'], imageURI:'https://www.incredibleegg.org/wp-content/uploads/Scrambled-with-Milk-930x620.jpg', cost: 2.5},\\",
+							"    {id: 120, recipeName: 'Basic Omelette', type: 'breakfast', ingredients: ['eggs', 'onions', 'cheese', 'milk'], imageURI:'https://img.sndimg.com/food/image/upload/w_896,h_504,c_fill,fl_progressive,q_80/v1/img/recipes/82/53/8/RkND79iJRAytDrkaoSdE_easy-omelette-3784.jpg', cost: 2.75},\\",
+							"    {id: 130, recipeName: 'Deviled Eggs', type: 'breakfast', ingredients: ['eggs', 'mayonnaise', 'pepper'], imageURI:'https://food.fnr.sndimg.com/content/dam/images/food/fullset/2008/6/9/0/CI0103_Classic-Deviled-Eggs.jpg.rend.hgtvcom.616.462.suffix/1479929974560.jpeg', cost: 3.25},\\",
+							"    ]}\");"
+						]
+					}
+				}
+			],
+			"request": {
+				"url": {
+					"raw": "https://baneonplane.hopto.org:5007/search?query=eggs",
+					"protocol": "https",
+					"host": [
+						"baneonplane",
+						"hopto",
+						"org"
+					],
+					"port": "5007",
+					"path": [
+						"search"
+					],
+					"query": [
+						{
+							"key": "query",
+							"value": "eggs",
+							"equals": true,
+							"description": ""
+						}
+					],
+					"variable": []
+				},
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"description": "Searches for the specified string"
+			},
+			"response": []
+		},
+		{
+			"name": "GetRecommendations",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"tests[\"Body is correct\"] = JSON.parse(responseBody) === JSON.parse(\"{success: true, userId:102, recommendations:[\\",
+							"    {id: 100, recipeName: 'Scrambled Eggs', type: 'breakfast', ingredients: ['eggs', 'oil', 'pepper'], imageURI:'https://www.incredibleegg.org/wp-content/uploads/Scrambled-with-Milk-930x620.jpg', cost: 1.5},\\",
+							"    {id: 100, recipeName: 'Basic Omelette', type: 'breakfast', ingredients: ['eggs', 'oil', 'pepper', 'green pepper', 'onions'], imageURI:'https://img.sndimg.com/food/image/upload/w_896,h_504,c_fill,fl_progressive,q_80/v1/img/recipes/82/53/8/RkND79iJRAytDrkaoSdE_easy-omelette-3784.jpg', cost: 1.75},\\",
+							"    {id: 100, recipeName: 'Deviled Eggs', type: 'breakfast', ingredients: ['eggs', 'pepper', 'mayonnaise', 'vinegar', 'mustard'], imageURI:'https://food.fnr.sndimg.com/content/dam/images/food/fullset/2008/6/9/0/CI0103_Classic-Deviled-Eggs.jpg.rend.hgtvcom.616.462.suffix/1479929974560.jpeg', cost: 3},\\",
+							"    ]}\");",
+							"",
+							""
+						]
+					}
+				}
+			],
+			"request": {
+				"url": {
+					"raw": "https://baneonplane.hopto.org:5007/getRecommendations?userid=102",
+					"protocol": "https",
+					"host": [
+						"baneonplane",
+						"hopto",
+						"org"
+					],
+					"port": "5007",
+					"path": [
+						"getRecommendations"
+					],
+					"query": [
+						{
+							"key": "userid",
+							"value": "102",
+							"equals": true,
+							"description": ""
+						}
+					],
+					"variable": []
+				},
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"description": "Returns a list of recommendations for the user with the id specified"
+			},
+			"response": []
+		},
+		{
+			"name": "GetRecommendations(2)",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"tests[\"Body is correct\"] = JSON.parse(responseBody) === JSON.parse(\"{success: true, userId:105, recommendations:[\\",
+							"    {id: 100, recipeName: 'Pancakes', type: 'breakfast', ingredients: ['flour', 'wheat', 'syrup'], imageURI:'https://static01.nyt.com/images/2017/03/24/dining/24COOKING-CLASSICPANCAKES/24COOKING-CLASSICPANCAKES-articleLarge.jpg', cost: 2.5},\\",
+							"    {id: 120, recipeName: 'Strawberry Pancakes', type: 'breakfast', ingredients: ['flour', 'wheat', 'syrup', 'strawberries'], imageURI:'https://www.pumpkinnspice.com/wp-content/uploads/2016/11/strawberry-greek-yogurt-pancakes-4-1024x683.jpg', cost: 2.75},\\",
+							"    {id: 130, recipeName: 'Chocolate Pancakes', type: 'breakfast', ingredients: ['flour', 'wheat', 'syrup', 'chocolate chips'], imageURI:'https://bakerbynature.com/wp-content/uploads/2017/02/untitled-66-of-84-3-2.jpg', cost: 3.25},\\",
+							"    ]}\");",
+							"",
+							""
+						]
+					}
+				}
+			],
+			"request": {
+				"url": {
+					"raw": "https://baneonplane.hopto.org:5007/getRecommendations?userid=105",
+					"protocol": "https",
+					"host": [
+						"baneonplane",
+						"hopto",
+						"org"
+					],
+					"port": "5007",
+					"path": [
+						"getRecommendations"
+					],
+					"query": [
+						{
+							"key": "userid",
+							"value": "105",
+							"equals": true,
+							"description": ""
+						}
+					],
+					"variable": []
+				},
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"description": "Returns a list of recommendations for the user with the id specified"
+			},
+			"response": []
+		}
+	]
+}

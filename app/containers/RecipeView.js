@@ -28,21 +28,14 @@ class RecipeView extends React.Component{
     }
 
     render(){
+        const ingredients = this.props.navigation.state.params.ingredients;
+        const directions = this.props.navigation.state.params.directions;
+        console.log(ingredients);
+        console.log(directions);
         return (
             <ScrollView contentContainerStyle={{justifyContent: "space-around" }}>
                 <View style={{flex: 1}}>
                 <Image source={{uri:this.props.navigation.state.params.uri}} style={{margin: 0, height: 450, width: "100%"}} />
-                <View style={{flexDirection: "row", position: "absolute", top: 350,}}>
-                <View style={{width: 100, height: 100}}>
-                     <Button onPress={()=>{}} title="Update" style={{width: 100, height: 100}}>Saved</Button>
-                  </View>
-                  <View style={{width: 100, height: 100 }}>
-                        <Button onPress={()=>{}} title="Rate" style={{width: 100, height: 100}}>Saved</Button>
-                    </View> 
-                   <View style={{width: 100, height: 100 }}>
-                       <Button onPress={()=>{}} title="Save" style={{width: 100, height: 100}}>Saved</Button>
-                    </View> 
-                    </View>
                     <View>
                     <StarRating
                             disabled={false}
@@ -51,6 +44,31 @@ class RecipeView extends React.Component{
                             selectedStar={(rating) => this.props.updateRating(rating)}
                             />
 
+                    </View>
+                    <View style={{flexDirection: "column"}}>
+                    <View>
+                        <Text style={{fontSize: 24}}>Ingredients:</Text>
+                    {
+                        ingredients.map((item, index) => {
+                            console.log(item);
+                            return(
+                            <Text key={item} style={{fontSize: 20, color: "#233", marginBottom: 15}}>{item}</Text>
+                            )
+                        })
+
+                    }
+                    </View>
+                    <View>
+                    <Text style={{fontSize: 24}}>Directions:</Text>
+                        {
+                            directions.map((item, index) => {
+                                return (
+                                <Text key={item} style={{fontSize: 20, color: "#233", marginBottom: 18}}><Text style={{fontWeight:"bold", marginRight: 8, color:"#444", fontSize: 28}}>{index + 1}.</Text>{item}</Text>
+                                )
+                            })
+
+                        }
+                    </View>
                     </View>
                 </View>
               </ScrollView>

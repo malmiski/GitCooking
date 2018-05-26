@@ -10,9 +10,10 @@ export default function retrieveTopRated(userid=100){
         // then(response => response.json(), error => console.log("wassup", error)).then( json => {
         then( ()=>{
             dispatch(notifyDoneRetrieving([
-                {key: 16, name: "Pancakes", url: "https://food.fnr.sndimg.com/content/dam/images/food/fullset/2009/6/17/2/FNM080109Cover021_pink_s4x3.jpg.rend.hgtvcom.616.462.suffix/1383254816256.jpeg"}, 
-                {key:89, name: "Spaghetti", url: "https://www.cookingclassy.com/wp-content/uploads/2018/01/instant-pot-spaghetti-7-768x1152.jpg"}, 
+                {key: 16, name: "Steak", url: "https://www.omahasteaks.com/gifs/990x594/pr_ts004.jpg"}, 
+                {key:89, name: "Spaghetti and Meatballs", url: "https://hips.hearstapps.com/del.h-cdn.co/assets/17/39/2048x1365/gallery-1506456062-delish-spaghetti-meatballs.jpg"}, 
                 {key:9, name: "Tiramisu", url: "https://upload.wikimedia.org/wikipedia/commons/thumb/f/fc/Tiramisu_with_blueberries_and_raspberries%2C_July_2011.jpg/1280px-Tiramisu_with_blueberries_and_raspberries%2C_July_2011.jpg"},
+                {key:19, name: "Cheesburger", url: "https://www.kingsford.com/wp-content/uploads/2014/11/kfd-howtohamburger-Burgers_5_0391-1024x621.jpg"},
             ]))
             });
         }else{

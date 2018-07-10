@@ -14,17 +14,22 @@ import { connect } from "react-redux"
 import retrieveProfile from "../actions/RetrieveProfile";
 import {    Button,    Card} from "react-native-elements";
 import StarRating from "react-native-star-rating";
+import {Auth} from "aws-amplify";
 
 class GetCookingProfileScreen extends React.Component {
+    state = {user: {username: ''}}
     componentWillMount(){
         this.props.screenProps.onRefresh();
     }
     render() {
+        
         // console.log(this.props.navigation);
         const log = this.props.screenProps.profile.log;
         const image = this.props.screenProps.profile.userimage;
         const name = this.props.screenProps.profile.username;
         const userid = this.props.screenProps.profile.userid;
+        var username = "";
+        Auth.currentAuthenticatedUser().then(user => this.setState({user}))
         return (
             <ScrollView style={{ flex: 1, marginTop: 0, backgroundColor: "seashell" }}
                 scrollEnabled={true} 
@@ -33,7 +38,7 @@ class GetCookingProfileScreen extends React.Component {
                 <View style={{ flexDirection: "row", justifyContent: "space-between" }}>
                     <View style={{ alignItems: "center", margin: 10 }}>
                         <Image source={{ uri: image == "" ? "https://pc-tablet.com/wp-content/uploads/2016/12/New-Year-2017-images-videos.jpg" : image }} style={{ width: 120, height: 120, borderRadius: 75, }} />
-                        <Text >{name}</Text>
+                        <Text >{this.state.user.username}</Text>
                     </View>
                     <View style={{marginTop: 50, marginRight: 40}}>
                         <View style={{ flexDirection: "row", }}>
@@ -44,6 +49,7 @@ class GetCookingProfileScreen extends React.Component {
                         <View style={{ flexDirection: "row", }}>
                             <View style={{width: 200, height: 100 }}>
                                 <Button backgroundColor= "blue" onPress={()=>{this.props.navigation.navigate("FriendList", {id: userid})}} title="Friends" style={{alignSelf: "stretch", width: 100, height: 100}}>Friends</Button>
+                                <Button backgroundColor= "blue" onPress={()=>{Auth.signOut().then(success => console.log(success))}} title="Log out" style={{alignSelf: "stretch", width: 100, height: 100}}>Log out</Button>
                             </View>
                         </View>
                     </View>
@@ -98,7 +104,7 @@ class GetCookingProfileScreen extends React.Component {
 
 
 }
-const mapStateToProps = (state) =>{ return {log: state.profile_reducer.profile, rating: state.rating_reducer.rating}};
+const mapStateToProps = (state) =>{ return {log: state.profile_reducer.profile, rating: state.rating_reducer.rating, user: state.login_reducer.user}};
 const mapDispatchToProps = (dispatch) =>{ return {
     onPress: ()=>{ dispatch(retrieveProfile())}
 

@@ -7,7 +7,10 @@ import {Provider} from "react-redux";
 import {createStore, applyMiddleware} from "redux";
 import reducers from "./app/reducers";
 import thunkMiddleware from 'redux-thunk';
-
+import LoginContainer from "./app/containers/Login/LoginContainer";
+import aws_exports from "./app/aws-exports";
+import Amplify from "aws-amplify";
+Amplify.configure(aws_exports);
 import {
   StackNavigator,
 } from 'react-navigation';
@@ -17,20 +20,22 @@ import {
 const store = createStore(reducers, applyMiddleware(thunkMiddleware));
 import {Font, AppLoading} from "expo";
 import FontAwesome from './node_modules/@expo/vector-icons/fonts/FontAwesome.ttf';
-
+import {withAuthenticator} from "aws-amplify-react-native";
 
 import MaterialIcons from './node_modules/@expo/vector-icons/fonts/MaterialIcons.ttf';
 
 
 export default class App extends React.Component {
-  state = {    fontLoaded: false  };
+
+  state = {    fontLoaded: false};
   async componentWillMount() {
     try {
       await Font.loadAsync({
         FontAwesome,
         MaterialIcons
       });
-      this.setState({ fontLoaded: true });
+      setTimeout(()=> this.setState({...this.state,  fontLoaded: true }), 1500);
+
     } catch (error) {
       console.log('error loading icon fonts', error);
     }
@@ -45,22 +50,38 @@ export default class App extends React.Component {
     // Create a <Wrapper> react component that renders a <section> with
     // some padding and a papayawhip background
     const Wrapper = styled.View`
-    flex:1;
+      flex:1;
       background: white;
       justify-content: center;
     `;
 
+    // Check to see if the fonts have loaded, then if the user has signed in
     if (!this.state.fontLoaded) {
       return <AppLoading />;
     }
-    return (
-        <Wrapper>
-        <StatusBar barStyle="light-content" />
-          <Provider store={store}>
-            <GetCookingTabs/>
-          </Provider>
-        </Wrapper>
-    );
+    /*else {//if(store.getState().login_reducer.logged_in){
+      //const AuthTabs = withAuthenticator(GetCookingTabs);
+      return (
+          <Wrapper>
+          <StatusBar barStyle="light-content" />
+            <Provider store={store}>
+              <GetCookingTabs/>
+            </Provider>
+          </Wrapper>
+      );
+    }*/
+    else{
+      const AuthTabs = withAuthenticator(GetCookingTabs);
+      // Return the signin/signup page
+      return (
+      <Wrapper>
+        <Provider store={store}>
+          <AuthTabs/>
+        </Provider>
+      </Wrapper>
+          )
+
+    }
   }
 }
 

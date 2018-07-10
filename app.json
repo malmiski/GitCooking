@@ -1,6 +1,15 @@
 {
   "expo": {
-    "sdkVersion": "23.0.0"
+    "sdkVersion": "27.0.0",
+    "splash": {
+      "image": "app/assets/splash.png",
+      "backgroundColor": "#1515e9",
+      "resizeMode": "cover"
+
+    },
+    "androidStatusBar": {
+          "backgroundColor": "#34323"
+        }
   },
   "entryPoint": "./app/App.js"
 }

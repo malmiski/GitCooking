@@ -8,8 +8,8 @@ import GetCookingProfileScreen from "./GetCookingProfileScreen";
 import RecipeView from "./RecipeView";
 import FriendView from "./FriendView";
 import React from "react";
-import RecipeList from "./RecipeList"
-import FriendList from "./FriendList"
+import RecipeList from "./RecipeList";
+import FriendList from "./FriendList";
 import {Feather} from "@expo/vector-icons";
 const navigators = {};
 
@@ -92,4 +92,5 @@ navigators.ProfileNav = StackNavigator(
       headerStyle: {backgroundColor: "blue", borderColor: "white", borderBottomWidth: 2},
     },}
   });
+
 export default navigators;

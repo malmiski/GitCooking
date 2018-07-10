@@ -1,0 +1,6 @@
+{
+	"SourceDir": "app",
+	"DistributionDir": "/",
+	"BuildCommand": "npm.cmd run-script build",
+	"StartCommand": "npm run android"
+}

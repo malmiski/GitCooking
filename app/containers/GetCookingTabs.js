@@ -98,7 +98,7 @@ const style = StyleSheet.create({
 });
 
 const mapStateToProps = (state) =>{
-      return {
+  return {
         tab: state.tab_reducer.selected,
         refreshing: state.home_reducer.refreshing,
         retrievingProfile: state.profile_reducer.retrieving,

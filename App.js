@@ -27,7 +27,7 @@ import MaterialIcons from './node_modules/@expo/vector-icons/fonts/MaterialIcons
 
 export default class App extends React.Component {
 
-  state = {    fontLoaded: false};
+  state = {fontLoaded: false};
   async componentWillMount() {
     try {
       await Font.loadAsync({
@@ -59,17 +59,6 @@ export default class App extends React.Component {
     if (!this.state.fontLoaded) {
       return <AppLoading />;
     }
-    /*else {//if(store.getState().login_reducer.logged_in){
-      //const AuthTabs = withAuthenticator(GetCookingTabs);
-      return (
-          <Wrapper>
-          <StatusBar barStyle="light-content" />
-            <Provider store={store}>
-              <GetCookingTabs/>
-            </Provider>
-          </Wrapper>
-      );
-    }*/
     else{
       const AuthTabs = withAuthenticator(GetCookingTabs);
       // Return the signin/signup page

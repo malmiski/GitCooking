@@ -1,9 +1,11 @@
 import { debugging, address} from "../debugging";
+import { API } from "aws-amplify";
 
-export default function retrieveTopRated(userid=100){
+export default function retrieveTopRated(nextToken=""){
     // Thunk will place the dispatch variable here for us
     return (dispatch) =>{
-            dispatch(notifyRetrieving());
+        dispatch(notifyRetrieving());
+        /*
         if(debugging){
         //fetch(`https://jsonplaceholder.typicode.com/users`).
         new Promise(resolve => {resolve()}).
@@ -23,6 +25,9 @@ export default function retrieveTopRated(userid=100){
                 notifyDoneRetrieving(json);
             })
         }
+        */
+        // Use the nextToken to get the next top recipes
+        API.graphql(graphqlOperation(getTopRecipes, {nextToken}))
         };
 
     }

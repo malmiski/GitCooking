@@ -26,4 +26,28 @@ Layanne Hazim
 Sean Scott
 
 =======
-An application I helped to create in CS3231
+An application I helped to create in CS321
+
+## Install Instructions
+First clone the repository from this page:
+```bash 
+    git clone https://malmiski.github.com/GitCooking.git
+```
+Then install ```awsmobile``` from ```npm``` with the following command:
+```bash
+  npm install awsmobile-cli -g
+```
+Afterwards use awsmobile to initialize your aws-backend with the following commands
+```bash
+    awsmobile init
+    awsmobile configure
+```
+This will ask you for your AWS credentials and access key. After that you can enable AWS Cognito and AWS AppSync to enable your backend:
+```bash
+    awsmobile user-signin enable
+    awsmobile appsync enable
+```
+After you have done this you can then proceed to replace the schema on AWS AppSync with the one provided in the project under awsmobilejs/appSync/schema.graphql.
+After this you will need to attach the resolvers for the Query, Mutatations, and Subscription as well as the custom fields in the types. All these are provided as well under awsmobilejs/resolvers/
+
+Finally after this you can install the dependencies with a simple ```npm install```. To run the application make sure to connect a phone or have available a virtual device to install the application on. Running ```npm run android``` will install it onto your android device.

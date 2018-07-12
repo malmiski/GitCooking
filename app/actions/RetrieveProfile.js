@@ -1,9 +1,12 @@
 import { debugging, address } from "../debugging";
+import { Auth, API, graphqlOperation } from "aws-amplify";
+import { getProfile } from "../graphql-queries";
 
 export default function retrieveProfile(){
         // Thunk will place the dispatch variable here for us
         return (dispatch) =>{
-                dispatch(notifyRetrieving());
+            dispatch(notifyRetrieving());
+            /*
             if(debugging){
             //fetch(`https://jsonplaceholder.typicode.com/users`).
             new Promise(resolve => {resolve()}).
@@ -77,8 +80,14 @@ export default function retrieveProfile(){
             .then( json => {
                 notifyDoneRetrieving(json);
             })
-        }
-        };
+        }*/
+        Auth.currentAuthenticatedUser()
+            .then(user =>{
+                    API.graphql(graphqlOperation(getProfile, {id: user.signInUserSession.idToken.payload.sub}))
+                    .then(result => {console.log(result); dispatch(notifyDoneRetrieving(result))})
+            })
+            .catch(error => console.error(error))
+    };
 
 }
 

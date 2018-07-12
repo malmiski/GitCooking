@@ -15,7 +15,8 @@ import retrieveProfile from "../actions/RetrieveProfile";
 import {    Button,    Card} from "react-native-elements";
 import StarRating from "react-native-star-rating";
 import {Auth} from "aws-amplify";
-
+import {API,    graphqlOperation} from "aws-amplify";
+import { getRecipe } from '../graphql-queries';
 class GetCookingProfileScreen extends React.Component {
     state = {user: {username: ''}}
     componentWillMount(){
@@ -24,12 +25,13 @@ class GetCookingProfileScreen extends React.Component {
     render() {
         
         // console.log(this.props.navigation);
-        const log = this.props.screenProps.profile.log;
-        const image = this.props.screenProps.profile.userimage;
-        const name = this.props.screenProps.profile.username;
+        const log = this.props.screenProps.profile.userLog;
+        const image = this.props.screenProps.profile.profile_pic;
+        const name = this.props.screenProps.profile.name;
         const userid = this.props.screenProps.profile.userid;
-        var username = "";
-        Auth.currentAuthenticatedUser().then(user => this.setState({user}))
+        var username = this.props.screenProps.profile.username;
+        var favorites = this.props.screenProps.profile.favorites;
+        console.log(favorites);
         return (
             <ScrollView style={{ flex: 1, marginTop: 0, backgroundColor: "seashell" }}
                 scrollEnabled={true} 
@@ -38,26 +40,29 @@ class GetCookingProfileScreen extends React.Component {
                 <View style={{ flexDirection: "row", justifyContent: "space-between" }}>
                     <View style={{ alignItems: "center", margin: 10 }}>
                         <Image source={{ uri: image == "" ? "https://pc-tablet.com/wp-content/uploads/2016/12/New-Year-2017-images-videos.jpg" : image }} style={{ width: 120, height: 120, borderRadius: 75, }} />
-                        <Text >{this.state.user.username}</Text>
+                        <Text >{username}</Text>
                     </View>
                     <View style={{marginTop: 50, marginRight: 40}}>
                         <View style={{ flexDirection: "row", }}>
                             <View style={{width: 200, height: 100 }}>
-                                <Button backgroundColor= "blue" onPress={()=>{this.props.navigation.navigate("RecipeList", {id: userid})}} title="Recipes" style={{width: 100, height: 100}}>Recipes</Button>
+                                <Button backgroundColor= "blue" onPress={()=>{this.props.navigation.navigate("RecipeList", {favorites})}} title="Recipes" style={{width: 100, height: 100}}>Recipes</Button>
                             </View>
                         </View>
                         <View style={{ flexDirection: "row", }}>
                             <View style={{width: 200, height: 100 }}>
                                 <Button backgroundColor= "blue" onPress={()=>{this.props.navigation.navigate("FriendList", {id: userid})}} title="Friends" style={{alignSelf: "stretch", width: 100, height: 100}}>Friends</Button>
                                 <Button backgroundColor= "blue" onPress={()=>{Auth.signOut().then(success => console.log(success))}} title="Log out" style={{alignSelf: "stretch", width: 100, height: 100}}>Log out</Button>
+                                <Button backgroundColor= "blue" onPress={()=>{        
+                                    API.graphql(graphqlOperation(getRecipe,{id: "91290"})).then(res => console.log(res))}} title="Press me!" style={{alignSelf: "stretch", width: 100, height: 100}}>Log out</Button>
                             </View>
                         </View>
                     </View>
                 </View>
 
                 <View style={{ borderBottomColor: "black", borderBottomWidth: 2, margin: 10, alignContent: "center" }} />
-
-                                        <View>
+                
+                
+                <View>
                                         {
                 log.map((prop) => {
                     return (

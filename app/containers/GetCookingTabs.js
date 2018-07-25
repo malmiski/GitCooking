@@ -17,6 +17,9 @@ class GetCookingTabs extends React.Component{
   constructor(props){
     super(props);
   }
+  componentWillMount(){
+      this.props.onProfileRefresh();
+  }
     displayText(text){
       if(this.props.tab === text){
         return text;

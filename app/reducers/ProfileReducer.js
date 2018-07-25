@@ -9,6 +9,7 @@ export default function profile_reducer(state={retrieving: false, profile:{id:0,
                                                             username: profile.username,
                                                             profile_pic: profile.profile_pic,
                                                             favorites: profile.favorites,
+                                                            friends: profile.friends,
                                                             userLog: []}};
         }
         return state;

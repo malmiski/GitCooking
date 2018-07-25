@@ -1,8 +1,11 @@
 import { debugging, address } from "../debugging";
+import {API, graphqlOperation} from "aws-amplify";
+import {searchForRecipe} from "../graphql-queries";
 export default function searchRecipes(query=""){
     // Thunk will place the dispatch variable here for us
     return (dispatch) =>{
             dispatch(notifyRetrieving());
+        /*    
         if(debugging){
         //fetch(`https://jsonplaceholder.typicode.com/users`).
         new Promise(resolve => {setTimeout(resolve, 1650)}).
@@ -20,7 +23,9 @@ export default function searchRecipes(query=""){
             .then( json => {
                 notifyDoneRetrieving(json);
             })
-        }
+        }*/
+        API.graphql(graphqlOperation(searchForRecipe, {query}))
+        .then(result => {console.log(result); dispatch(notifyDoneRetrieving(result))})
         };
 
     }
@@ -34,7 +39,7 @@ return {
 function notifyDoneRetrieving(json=[]){
 return {
     type: "DONE_SEARCHING",
-    recipes: json
+    recipes: json.data.search
 }
 }
 

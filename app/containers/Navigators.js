@@ -90,7 +90,8 @@ navigators.ProfileNav = StackNavigator(
       title: ``,
       headerTitle: ()=>{return <Text style={{alignContent: "center", color: "white", fontSize:24,fontWeight: "900"}}></Text>},
       headerStyle: {backgroundColor: "blue", borderColor: "white", borderBottomWidth: 2},
-    },}
+    },
+  }
   });
 
 export default navigators;

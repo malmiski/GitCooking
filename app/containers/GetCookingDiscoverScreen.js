@@ -6,7 +6,7 @@ import { connect } from "react-redux"
 import retrieveNewRecipes from "../actions/RetrieveNewRecipes";
 import retrieveTopRated from "../actions/RetrieveTopRated";
 import searchRecipes from "../actions/SearchRecipes";
-import updateRecommended from "../actions/UpdateRecommended";
+// import updateRecommended from "../actions/UpdateRecommended";
 class GetCookingDiscoverScreen extends React.Component{
     constructor(props){
         super(props);
@@ -19,7 +19,7 @@ class GetCookingDiscoverScreen extends React.Component{
     render(){
         return (<ScrollView>
       <SearchBar
-        onChangeText={() => this.props.search()}
+        onChangeText={(text) => {if(this.timeout) clearTimeout(this.timeout); this.timeout = setTimeout(()=>this.props.search(text), 500)}}
         height={50}
         placeholder={'Search For Recipes...'}
         autoCorrect={true}
@@ -33,14 +33,15 @@ class GetCookingDiscoverScreen extends React.Component{
                 data={this.props.results}
                 renderItem={({item}) =>{
                     return (
-                    <Card  image={{uri: item.url}} containerStyle={{padding: 0, width:160}}
-                        onPress={()=>{this.props.navigation.navigate("RecipeView", {url: item.url})}}
+                    <Card  image={{uri: item.pic}} containerStyle={{padding: 0, width:160}}
+                        onPress={()=>{this.props.navigation.navigate("RecipeView", {url: item.pic})}}
                     >
                         <Text style={{marginBottom: 15, }}>{item.name}</Text>
                     </Card>
                     )
                 }}
-            />
+                keyExtractor={(item) => item.id}
+                />
             <Text style={{fontSize: 28, fontWeight: "bold"}}>Top Rated Recipes <FontAwesome style={{fontSize: 28}} name="long-arrow-right"/> </Text>
             <FlatList
                 horizontal
@@ -48,12 +49,14 @@ class GetCookingDiscoverScreen extends React.Component{
                 renderItem={({item}) =>{
                     return (
                     <Card 
-                    onPress={()=>{this.props.navigation.navigate("RecipeView", {uri: item.url})}}
-                    image={{uri: item.url}} containerStyle={{padding: 0, width:160}}>
+                    onPress={()=>{this.props.navigation.navigate("RecipeView", {uri: item.pic})}}
+                    image={{uri: item.pic}} containerStyle={{padding: 0, width:160}}>
                         <Text style={{marginBottom: 15, }}>{item.name}</Text>
                     </Card>
                     )
-                }}
+                }
+            }
+            keyExtractor={(item) => item.id}
             >
                 </FlatList>
                 <Text style={{fontSize: 28, fontWeight: "bold"}}>Recommended for you <FontAwesome style={{fontSize: 28}} name="long-arrow-right"/> </Text>
@@ -87,13 +90,13 @@ const mapStateToProps = (state) =>{ return {
                         searching: state.search_reducer.retrieving,
                         top_recipes: state.top_recipe_reducer.recipes, 
                         new_recipes: state.new_recipe_reducer.recipes,
-                        recommended: state.recommender_reducer.log
+                        // recommended: state.recommender_reducer.log
                         }};
 const mapDispatchToProps = (dispatch) =>{ return {
     search: (query)=> {dispatch(searchRecipes(query))},
     retrieveTop: ()=>{dispatch(retrieveTopRated())},
     retrieveNew: ()=>{dispatch(retrieveNewRecipes())},
-    updateRecommended: ()=>{dispatch(updateRecommended())}
+    // updateRecommended: ()=>{dispatch(updateRecommended())}
     }}
 
 export default connect(mapStateToProps, mapDispatchToProps)(GetCookingDiscoverScreen);

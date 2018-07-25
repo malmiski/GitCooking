@@ -36,6 +36,6 @@
     "redux-logger": "^3.0.6",
     "redux-thunk": "^2.2.0",
     "styled-components": "^2.4.0",
-    "tcomb-form-native": "^0.6.11"
+    "tcomb-form-native": "^0.6.15"
   }
 }

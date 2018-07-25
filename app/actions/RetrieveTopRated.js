@@ -1,5 +1,6 @@
 import { debugging, address} from "../debugging";
-import { API } from "aws-amplify";
+import { API, graphqlOperation } from "aws-amplify";
+import { topRecipes } from "../graphql-queries";
 
 export default function retrieveTopRated(nextToken=""){
     // Thunk will place the dispatch variable here for us
@@ -27,7 +28,9 @@ export default function retrieveTopRated(nextToken=""){
         }
         */
         // Use the nextToken to get the next top recipes
-        API.graphql(graphqlOperation(getTopRecipes, {nextToken}))
+        API.graphql(graphqlOperation(topRecipes, {query: ""}))
+        .then(result => {console.log(result); dispatch(notifyDoneRetrieving(result))})
+
         };
 
     }
@@ -41,7 +44,7 @@ return {
 function notifyDoneRetrieving(json=[]){
 return {
     type: "DONE_RETRIEVING_TOP_RECIPES",
-    recipes: json
+    recipes: json.data.searchByRating
 }
 }
 

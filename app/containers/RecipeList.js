@@ -36,6 +36,7 @@ class RecipeList extends React.Component{
                     </TouchableHighlight>)}}
                 refreshing={this.props.retrieving}
                 onRefresh={this.props.onRefresh(this.props.screenProps.id)}
+                keyExtractor={(item) => item.id}
             />
         );
 

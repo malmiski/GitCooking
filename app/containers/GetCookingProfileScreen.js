@@ -8,6 +8,7 @@ import {
     StyleSheet,
     Text,
     TouchableHighlight,
+    TouchableWithoutFeedback,
     View
 } from 'react-native';
 import { connect } from "react-redux"
@@ -15,22 +16,23 @@ import retrieveProfile from "../actions/RetrieveProfile";
 import {    Button,    Card} from "react-native-elements";
 import StarRating from "react-native-star-rating";
 import {Auth} from "aws-amplify";
+import {ImagePicker} from "expo";
 import {API,    graphqlOperation} from "aws-amplify";
 import { getRecipe } from '../graphql-queries';
 class GetCookingProfileScreen extends React.Component {
     state = {user: {username: ''}}
     componentWillMount(){
-        this.props.screenProps.onRefresh();
+        this.props.onPress();
     }
     render() {
         
         // console.log(this.props.navigation);
-        const log = this.props.screenProps.profile.userLog;
-        const image = this.props.screenProps.profile.profile_pic;
-        const name = this.props.screenProps.profile.name;
-        const userid = this.props.screenProps.profile.userid;
-        var username = this.props.screenProps.profile.username;
-        var favorites = this.props.screenProps.profile.favorites;
+        const log = this.props.profile.userLog;
+        const image = this.props.profile.profile_pic;
+        const name = this.props.profile.name;
+        const userid = this.props.profile.userid;
+        var username = this.props.profile.username;
+        var favorites = this.props.profile.favorites;
         console.log(favorites);
         return (
             <ScrollView style={{ flex: 1, marginTop: 0, backgroundColor: "seashell" }}
@@ -38,10 +40,28 @@ class GetCookingProfileScreen extends React.Component {
                 refreshControl={<RefreshControl refreshing={this.props.screenProps.retrieving}
                     onRefresh={this.props.screenProps.onRefresh} />}>
                 <View style={{ flexDirection: "row", justifyContent: "space-between" }}>
-                    <View style={{ alignItems: "center", margin: 10 }}>
+                    <TouchableWithoutFeedback onPressIn={()=>{
+                        // TODO: Complete this so that a new image is saved in S3 for
+                        // the image picked by the user, also update the user profile
+
+                        // Create a image picker to replace the image
+                        ImagePicker.launchImageLibraryAsync({
+                            allowsEditing: true,
+                            aspect: [4, 3],
+                        }).then(result => {
+                    
+                        console.log(result);
+                    
+                        if (!result.cancelled) {
+                            this.setState({ image: result.uri });
+                        }
+                        });
+                    }}>
+                    <View style={{ alignItems: "center", margin: 10 }} >
                         <Image source={{ uri: image == "" ? "https://pc-tablet.com/wp-content/uploads/2016/12/New-Year-2017-images-videos.jpg" : image }} style={{ width: 120, height: 120, borderRadius: 75, }} />
                         <Text >{username}</Text>
                     </View>
+                    </TouchableWithoutFeedback>
                     <View style={{marginTop: 50, marginRight: 40}}>
                         <View style={{ flexDirection: "row", }}>
                             <View style={{width: 200, height: 100 }}>
@@ -50,12 +70,10 @@ class GetCookingProfileScreen extends React.Component {
                         </View>
                         <View style={{ flexDirection: "row", }}>
                             <View style={{width: 200, height: 100 }}>
-                                <Button backgroundColor= "blue" onPress={()=>{this.props.navigation.navigate("FriendList", {id: userid})}} title="Friends" style={{alignSelf: "stretch", width: 100, height: 100}}>Friends</Button>
-                                <Button backgroundColor= "blue" onPress={()=>{Auth.signOut().then(success => console.log(success))}} title="Log out" style={{alignSelf: "stretch", width: 100, height: 100}}>Log out</Button>
-                                <Button backgroundColor= "blue" onPress={()=>{        
-                                    API.graphql(graphqlOperation(getRecipe,{id: "91290"})).then(res => console.log(res))}} title="Press me!" style={{alignSelf: "stretch", width: 100, height: 100}}>Log out</Button>
+                                <Button backgroundColor= "blue" onPress={()=>{this.props.navigation.navigate("FriendList", {friends: this.props.screenProps.profile.friends})}} title="Friends" style={{alignSelf: "stretch", width: 100, height: 100}}>Friends</Button>
                             </View>
                         </View>
+                        <Button style={{borderRadius: 25}} backgroundColor= "blue" onPress={()=>{Auth.signOut().then(success => console.log(success))}} title="Log out" style={{alignSelf: "stretch", width: 100, height: 100}}>Log out</Button>
                     </View>
                 </View>
 
@@ -109,31 +127,16 @@ class GetCookingProfileScreen extends React.Component {
 
 
 }
-const mapStateToProps = (state) =>{ return {log: state.profile_reducer.profile, rating: state.rating_reducer.rating, user: state.login_reducer.user}};
+const mapStateToProps = (state) =>{ return {
+                                            log: state.profile_reducer.profile,
+                                            rating: state.rating_reducer.rating,
+                                            user: state.login_reducer.user,
+                                            profile: state.profile_reducer.profile
+                                        }
+                                           };
 const mapDispatchToProps = (dispatch) =>{ return {
     onPress: ()=>{ dispatch(retrieveProfile())}
 
 }};
 
 export default connect(mapStateToProps, mapDispatchToProps)(GetCookingProfileScreen);
-
-/**
- * prop = {
- *      userid,
- *      username,
- *      userimage,
- *      log = [
- *          {
- *              date,
- *              meals = [],
- *              mealid,
- *              visible,
- *          }
- *      ]
- * 
- * 
- * }
- * 
- * 
- * 
- */

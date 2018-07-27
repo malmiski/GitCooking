@@ -22,6 +22,15 @@ export const getRecipe = `query GetRecipe($id:ID!){
       cost
       name
       pic
+      ingredients{
+          ingredient{
+              name
+              cost
+          }
+          quantity
+      }
+      stars
+      instructions
     }
   }`
 export const searchForRecipe = `

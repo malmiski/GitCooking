@@ -17,8 +17,6 @@ import {    Button,    Card} from "react-native-elements";
 import StarRating from "react-native-star-rating";
 import {Auth} from "aws-amplify";
 import {ImagePicker} from "expo";
-import {API,    graphqlOperation} from "aws-amplify";
-import { getRecipe } from '../graphql-queries';
 class GetCookingProfileScreen extends React.Component {
     state = {user: {username: ''}}
     componentWillMount(){

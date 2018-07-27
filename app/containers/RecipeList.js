@@ -19,7 +19,7 @@ class RecipeList extends React.Component{
                 renderItem={({item}) => {
                     return (
                     <TouchableHighlight
-                    onPress={() => {this.props.navigation.navigate("RecipeView", {uri:item.pic, title: item.name, directions: [], ingredients: []})}}
+                    onPress={() => {this.props.navigation.navigate("RecipeView", {uri:item.pic, id: item.id, title: item.name})}}
                     underlayColor="black"
                     key={item.id}
                     >

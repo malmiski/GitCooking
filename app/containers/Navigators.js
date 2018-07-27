@@ -32,17 +32,38 @@ navigators.HomeNav = StackNavigator({
 
 });
 
-navigators.DiscoverNav = StackNavigator({Home: {screen:  GetCookingDiscoverScreen,
-    navigationOptions: {
-      title: `Back`,
-    headerTitle: ()=>{return <Text style={{color: "white", fontSize:24, fontWeight: "900"}}>Discover new recipes</Text>},
-    headerStyle: {backgroundColor: "blue", borderColor: "white", borderBottomWidth: 2},
+navigators.DiscoverNav = StackNavigator(
+  {
+    Home: {
+      screen:  GetCookingDiscoverScreen,
+      navigationOptions: {
+        title: ``,
+        headerTitle: ()=>{return <Text style={{alignContent: "center", color: "white", fontSize:24,fontWeight: "900"}}>Profile</Text>},
+        headerStyle: {backgroundColor: "blue", borderColor: "white", borderBottomWidth: 2},
+      },
     },
-    RecipeView: {screen: RecipeView, navigationOptions: {
-      headerTitle: ()=>{return  <Text style={{color: "#dfdfdf", fontSize: 24, marginLeft:5, fontWeight:"bold"}}></Text>},//<Image source={require('../assets/tmobile-logo.png')} style={{width: 100, height: 58}}/>},
-      headerStyle: {backgroundColor: "blue", borderColor: "white", borderBottomWidth: 2},    
-    }},
-  }});
+    RecipeList: {screen: RecipeList, navigationOptions: {
+      title: ``,
+      headerTitle: ()=>{return <Text style={{alignContent: "center", color: "white", fontSize:24,fontWeight: "900"}}>Your Recipes</Text>},
+      headerStyle: {backgroundColor: "blue", borderColor: "white", borderBottomWidth: 2},
+    },},
+    FriendList: {screen: FriendList, navigationOptions: {
+      title: ``,
+      headerTitle: ()=>{return <Text style={{alignContent: "center", color: "white", fontSize:24,fontWeight: "900"}}>Your Friends</Text>},
+      headerStyle: {backgroundColor: "blue", borderColor: "white", borderBottomWidth: 2},
+    },},
+    RecipeView: {screen: RecipeView, navigationOptions: ({navigation}) => {
+      return {
+      headerTitle: ()=>{return <Text style={{alignContent: "center", color: "white", fontSize:24,fontWeight: "900"}}>{navigation.state.params.title}</Text>},
+      headerStyle: {backgroundColor: "blue", borderColor: "white", borderBottomWidth: 2},}
+    },},
+    FriendView: {screen: FriendView, navigationOptions: {
+      title: ``,
+      headerTitle: ()=>{return <Text style={{alignContent: "center", color: "white", fontSize:24,fontWeight: "900"}}></Text>},
+      headerStyle: {backgroundColor: "blue", borderColor: "white", borderBottomWidth: 2},
+    },
+  }
+});
 
 navigators.RecipeLogNav = StackNavigator({
   Home: {screen:  GetCookingRecipeLogScreen,

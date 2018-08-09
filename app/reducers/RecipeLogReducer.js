@@ -11,10 +11,12 @@ recipes:{1:{breakfast: {id: "", name: "", cost:0, contents:[]}, lunch: {id: "", 
     }else if(action.type === "DONE_RETRIEVING_RECIPE_LOG"){
         state = {...state, retrieving: false, recipes: action.recipes};
     }else if(action.type === "UPDATING_LOG"){
+        console.log(action.dinner);
         // Update the changed recipes
         var recipes = state.recipes;
         recipes[action.day] = {breakfast: action.breakfast, lunch: action.lunch, dinner: action.dinner};
-        state = {...state, recipes, updating: true};
+        console.log(recipes[action.day])
+;        state = {...state, recipes, updating: true};
     }else if(action.type === "UPDATED_LOG"){
         state = {...state, updating: false};
     }

@@ -68,18 +68,19 @@ class GetCookingRecipeLogScreen extends React.Component{
         )*/
             }
     componentDidUpdate(){
-        console.log("Updated");
+        console.log("Updated");/*
         console.log(this.state.update);
         if(this.state.update){
             this.props.updateLog(...this.state.update);
-            this.state.update = null;
-        }
+            this.setState({...this.state, update: null})
+        }*/
     }
     onPress(formNumber){
         // Update the specified day, with the new log information
         return ()=>{
+        if(this.props.updating || this.props.retrieving) return;
         var value = this.refs[`form${formNumber}`].getValue();
-        console.log(value);
+        // console.log(value);
         var breakfast = {...this.props.log[formNumber].breakfast};
         breakfast.contents = value.breakfastIngredients != null ? value.breakfastIngredients.split(" ") : [];
         breakfast.cost = value.breakfastCost;
@@ -98,16 +99,16 @@ class GetCookingRecipeLogScreen extends React.Component{
         dinner.name = value.dinner;
         dinner.userID = this.props.id;
         // console.log(lunch, breakfast, dinner);
-        
-        this.setState({...this.state, update: [breakfast, lunch, dinner]});
-        // this.props.updateLog(breakfast, lunch, dinner);
+        console.log(dinner);
+        // this.setState({...this.state, update: [breakfast, lunch, dinner]});
+        this.props.updateLog(formNumber, breakfast, lunch, dinner);
         // Alert.alert(`Updated Log for Day ${formNumber}`)
         }
     }
     render(){
         var list = [1,2,3,4,5,6,7];
         var log = this.props.log;
-        console.log(log);
+        // console.log(log);
         return (
             <ScrollView>
             {
@@ -141,10 +142,13 @@ class GetCookingRecipeLogScreen extends React.Component{
         )
     }
 }
-const mapStateToProps = (state) =>{ return {log: state.recipe_log_reducer.recipes, id: state.profile_reducer.profile.id, retrieving: state.recipe_log_reducer.retrieving, updating: state.recipe_log_reducer.updating}};
+const mapStateToProps = (state) =>{ return {log: state.recipe_log_reducer.recipes, 
+                                            id: state.profile_reducer.profile.id, 
+                                            retrieving: state.recipe_log_reducer.retrieving, 
+                                            updating: state.recipe_log_reducer.updating}};
 const mapDispatchToProps = (dispatch) =>{ return {
     getLog: (id)=>{ dispatch(retrieveRecipeLog(id))},
-    updateLog: (breakfast, lunch, dinner)=>{dispatch(updateLog(breakfast, lunch, dinner))},
+    updateLog: (day, breakfast, lunch, dinner)=>{dispatch(updateLog(day, breakfast, lunch, dinner))},
     }
 };
 

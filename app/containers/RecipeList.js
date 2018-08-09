@@ -8,7 +8,6 @@ class RecipeList extends React.Component{
         super(props);
     }
     componentWillMount(){
-        // this.props.onRefresh(this.props.screenProps.id)();
         this.props.navigation.setParams({headerTitle: ()=>{return <Text style={{color: "black", fontWeight: "900"}}>My</Text>}});
     }
     render(){

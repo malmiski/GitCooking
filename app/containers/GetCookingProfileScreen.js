@@ -17,6 +17,7 @@ import {    Button,    Card} from "react-native-elements";
 import StarRating from "react-native-star-rating";
 import {Auth} from "aws-amplify";
 import {ImagePicker} from "expo";
+import {FontAwesome} from "@expo/vector-icons";
 class GetCookingProfileScreen extends React.Component {
     state = {user: {username: ''}}
     componentWillMount(){
@@ -25,7 +26,7 @@ class GetCookingProfileScreen extends React.Component {
     render() {
         
         // console.log(this.props.navigation);
-        const log = this.props.profile.userLog;
+        const reviews = this.props.profile.reviews;
         const image = this.props.profile.profile_pic;
         const name = this.props.profile.name;
         const userid = this.props.profile.userid;
@@ -78,41 +79,42 @@ class GetCookingProfileScreen extends React.Component {
                 <View style={{ borderBottomColor: "black", borderBottomWidth: 2, margin: 10, alignContent: "center" }} />
                 
                 
-                <View>
-                                        {
-                log.map((prop) => {
+                <View style={{marginBottom: 40}}>
+                {
+                    reviews && reviews.length > 0 ? 
+                    <Text style={{fontSize: 28, fontWeight: "bold", textAlign: "center"}}> Your Reviewed Recipes </Text>
+                    :
+                    null
+                }
+                {
+                reviews.map((item) => {
+                    var date = new Date(item.date);
+                    var rating = item.stars;
                     return (
-                    <View  key={prop.key} style={{ flexDirection: "row" }}>
-                        <Text style={{fontSize:  28, fontWeight: "900", width: 56}}> {prop.date} </Text>
+                    <View  key={item.id} style={{ flexDirection: "row" }}>
+                        <Text style={{fontSize:  28, fontWeight: "900", width: 56}}> {date.toLocaleDateString("en-US")} </Text>
                         <View style={{width: 1, backgroundColor: "black"}}/>
                         <View>
-                        {
-                            prop.meals.map((item) =>{
-                                var rating = item.rating;
-                                if(item.key == 56 && this.props.rating){rating = this.props.rating}
-                                return ( 
-                                    <View key={item.key}>
                                         <View style={{flexDirection: "row"}}>
                                             <Image source={{uri: image}} style={{ width: 40, height: 40, borderRadius: 20, }} />
                                             <Text>{name}</Text>
                                         </View> 
                                         <Text> {item.name} </Text>
-                                        <Card image={{uri: item.image}} containerStyle={{padding: 0, width:280}}>
-                                        <StarRating
-                                            disabled={true}
-                                            maxStars={5}
-                                            rating={rating}
-                                            selectedStar={(rating) => console.log(rating)}
-                                        />
-
+                                        <TouchableHighlight onPress={()=>this.props.navigation.navigate("RecipeView", {id: item.recipe.id, uri: item.pic, title: item.recipe.name, reviewID: item.id})}>
+                                        <Card image={{uri: item.pic ? item.pic : item.recipe.pic}} containerStyle={{padding: 0, width:280}}>
+                                            <StarRating
+                                                disabled={true}
+                                                maxStars={5}
+                                                rating={rating}
+                                                selectedStar={(rating) => console.log(rating)}
+                                            />
+                                            <Text style={{fontSize: 20}}>{item.recipe.name}</Text>
+                                            {item.comment ? <Text style={{fontSize: 16, fontFamily: ""}}> {item.comment} </Text> : null}
                                         </Card>
-                                    </View>
-                                )
-                            }
-                            )
-                        }
+                                        </TouchableHighlight>
                         </View>
-                    </View>)
+                    </View>
+                    )
                 })
             }
 

@@ -57,6 +57,7 @@ class GetCookingRecipeLogScreen extends React.Component{
     constructor(props){
         super(props);
     }
+    state = {}
     componentWillMount(){
         this.props.getLog( this.props.id);
         /*
@@ -66,7 +67,14 @@ class GetCookingRecipeLogScreen extends React.Component{
             options={options}/>
         )*/
             }
-
+    componentDidUpdate(){
+        console.log("Updated");
+        console.log(this.state.update);
+        if(this.state.update){
+            this.props.updateLog(...this.state.update);
+            this.state.update = null;
+        }
+    }
     onPress(formNumber){
         // Update the specified day, with the new log information
         return ()=>{
@@ -89,11 +97,12 @@ class GetCookingRecipeLogScreen extends React.Component{
         dinner.cost = value.dinnerCost;
         dinner.name = value.dinner;
         dinner.userID = this.props.id;
-        console.log(lunch, breakfast, dinner);
-       this.props.updateLog(breakfast, lunch, dinner);
+        // console.log(lunch, breakfast, dinner);
+        
+        this.setState({...this.state, update: [breakfast, lunch, dinner]});
+        // this.props.updateLog(breakfast, lunch, dinner);
         // Alert.alert(`Updated Log for Day ${formNumber}`)
         }
-
     }
     render(){
         var list = [1,2,3,4,5,6,7];

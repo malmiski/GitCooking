@@ -58,16 +58,19 @@ export const searchForRecipe = `
             username
             name
             profile_pic
-${/*            reviews{
+           reviews{
                 id
                 recipe{
+                    id
                     name
                     pic
                     stars
                 }
                 stars
+                comment
+                pic
+                date
             }
-        */''}
             userLog{
                 day
                 name

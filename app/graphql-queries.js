@@ -29,6 +29,15 @@ export const getRecipe = `query GetRecipe($id:ID!){
           }
           quantity
       }
+      reviews{
+          id
+          user{
+              name
+              profile_pic
+          }
+          stars
+          comment
+      }
       stars
       instructions
     }
@@ -48,6 +57,19 @@ export const searchForRecipe = `
             stars
             pic
             tags
+        }
+    }
+`
+export const updateFavorites = `
+    mutation updateFavorites($userID: ID!, $favorites: [ID!]!){
+        updateUser(input: {id: $userID, favoriteIDs:$favorites}){
+            favorites{
+                id
+                name
+                pic
+                stars
+                instructions
+            }
         }
     }
 `
@@ -88,11 +110,71 @@ export const searchForRecipe = `
                 name
                 profile_pic
             }
+            timeline{
+                user{
+                    id
+                    profile_pic
+                    name
+                }
+                recipe{
+                    id
+                    pic
+                    name
+                }
+                date
+                comment
+                stars
+                pic
+            }
+            goals{
+                successful
+                finished
+                numberRecipesMade
+                numberRecipesClaimed
+                startDate
+                durationInDays
+            }
         }
     }
   `;
 
-  export const getLog = `
+export const getTimeline = `
+query getProfile($id: ID!){
+    getUser(id: $id){
+        timeline{
+            id
+            user{
+                id
+                profile_pic
+                name
+            }
+            recipe{
+                id
+                pic
+                name
+            }
+            date
+            comment
+            stars
+            pic
+        }
+    }
+}`;
+export const getGoals = `
+query getProfile($id: ID!){
+    getUser(id: $id){
+        goals{
+            successful
+            finished
+            numberRecipesMade
+            numberRecipesClaimed
+            startDate
+            durationInDays
+        }
+    }
+}`;
+
+export const getLog = `
     query getLog($id: ID!){
             getUser(id: $id){
                 userLog{
@@ -117,6 +199,62 @@ export const updateLogEntryForDay = `
                     },
                     dinner: updateLogEntry(input: $dinnerObj){
                         id
+                    }
+            }
+
+`
+export const getReviewByRecipeUser = `
+                query getReviewByRecipeUser($userID: ID!, $recipeID: ID!){
+                    getReviewByRecipeUser(recipeID: $recipeID, userID: $userID){
+                        id
+                        date
+                        recipeID
+                        userID
+                        stars
+                        comment
+                        pic
+                    }
+                }
+`;
+
+export const createRatingForUser = `
+            mutation createRating($userID: ID!, $recipeID : ID!, $stars: Int!, $comment : String, $pic: String){
+                createReview(
+                    input: {
+                        userID: $userID, 
+                        recipeID: $recipeID, 
+                        stars: $stars, 
+                        pic: $pic,
+                        comment: $comment
+                    }){
+                        id
+                        date
+                        recipeID
+                        userID
+                        stars
+                        comment
+                        pic
+                    }
+            }
+`;
+
+export const updateRatingForUser = `
+            mutation updateRating($reviewID : ID!, $userID: ID!, $recipeID : ID!, $stars: Int!, $comment : String, $pic: String){
+                    updateReview(input:{
+                        id: $reviewID,
+                        userID: $userID,
+                        recipeID: $recipeID, 
+                        stars: $stars, 
+                        pic: $pic,
+                        comment: $comment
+                    }){
+                        id
+                        date
+                        recipeID
+                        userID
+                        stars
+                        comment
+                        pic
                     }
             }
 

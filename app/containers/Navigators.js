@@ -1,5 +1,5 @@
-import { StyleSheet, Text, View, StatusBar, Image} from 'react-native';
-import {StackNavigator} from 'react-navigation';
+import { StyleSheet, Text, View, TouchableHighlight, StatusBar, Image} from 'react-native';
+import {createStackNavigator} from 'react-navigation';
 import GetCookingHomeScreen from "./GetCookingHomeScreen";
 import GetCookingDiscoverScreen from "./GetCookingDiscoverScreen";
 import GetCookingRecipeLogScreen from "./GetCookingRecipeLogScreen";
@@ -11,12 +11,13 @@ import React from "react";
 import RecipeList from "./RecipeList";
 import FriendList from "./FriendList";
 import {Feather} from "@expo/vector-icons";
+import FontAwesome from '../../node_modules/@expo/vector-icons/FontAwesome';
 const navigators = {};
 
 /**
  * These are the various screens for each view in the tab bar
  */
-navigators.HomeNav = StackNavigator({
+navigators.HomeNav = createStackNavigator({
   Home: {screen:  GetCookingHomeScreen,
     navigationOptions: {
       title: `Home`,
@@ -24,15 +25,22 @@ navigators.HomeNav = StackNavigator({
     headerStyle: {backgroundColor: "blue", borderColor: "white", borderBottomWidth: 2},
     },
 },
-  RecipeView: {screen: RecipeView, navigationOptions: {
-    headerTitle: ()=>{return  <Text style={{color: "#dfdfdf", fontSize: 24, marginLeft:5, fontWeight:"bold"}}></Text>},//<Image source={require('../assets/tmobile-logo.png')} style={{width: 100, height: 58}}/>},
-    headerStyle: {backgroundColor: "blue", borderColor: "white", borderBottomWidth: 2},    
+  RecipeView: {screen: RecipeView, navigationOptions: ({navigation}) => {
+    return {
+    headerTitle: ()=>{return <Text style={{alignContent: "center", color: "white", fontSize:24,fontWeight: "900"}}>{navigation.state.params.title}</Text>},
+    headerStyle: {backgroundColor: "blue", borderColor: "white", borderBottomWidth: 2},
+    headerRight: (
+      <TouchableHighlight onPress={navigation.getParam('toggleFavorite')}>
+        <FontAwesome style={{fontSize: 28, marginRight: 5, marginRight: 5}} name={navigation.getParam("isFavorite") ? "star" : "star-o"}/>
+      </TouchableHighlight>
+    ),
+}
   }},
 
 
 });
 
-navigators.DiscoverNav = StackNavigator(
+navigators.DiscoverNav = createStackNavigator(
   {
     Home: {
       screen:  GetCookingDiscoverScreen,
@@ -55,7 +63,13 @@ navigators.DiscoverNav = StackNavigator(
     RecipeView: {screen: RecipeView, navigationOptions: ({navigation}) => {
       return {
       headerTitle: ()=>{return <Text style={{alignContent: "center", color: "white", fontSize:24,fontWeight: "900"}}>{navigation.state.params.title}</Text>},
-      headerStyle: {backgroundColor: "blue", borderColor: "white", borderBottomWidth: 2},}
+      headerStyle: {backgroundColor: "blue", borderColor: "white", borderBottomWidth: 2},
+      headerRight: (
+        <TouchableHighlight onPress={navigation.getParam('toggleFavorite')}>
+          <FontAwesome style={{fontSize: 28, marginRight: 5}} name={navigation.getParam("isFavorite") ? "star" : "star-o"}/>
+        </TouchableHighlight>
+      ),
+  }
     },},
     FriendView: {screen: FriendView, navigationOptions: {
       title: ``,
@@ -65,7 +79,7 @@ navigators.DiscoverNav = StackNavigator(
   }
 });
 
-navigators.RecipeLogNav = StackNavigator({
+navigators.RecipeLogNav = createStackNavigator({
   Home: {screen:  GetCookingRecipeLogScreen,
     navigationOptions: {
       headerTitle: ()=>{return <Text style={{alignContent: "center", color: "white", fontSize:24,fontWeight: "900"}}>My Log</Text>},
@@ -82,7 +96,7 @@ navigators.RecipeLogNav = StackNavigator({
 } 
 
 });
-navigators.ProfileNav = StackNavigator(
+navigators.ProfileNav = createStackNavigator(
   {
     Home: {
       screen:  GetCookingProfileScreen,
@@ -97,17 +111,30 @@ navigators.ProfileNav = StackNavigator(
       headerTitle: ()=>{return <Text style={{alignContent: "center", color: "white", fontSize:24,fontWeight: "900"}}>Your Recipes</Text>},
       headerStyle: {backgroundColor: "blue", borderColor: "white", borderBottomWidth: 2},
     },},
-    FriendList: {screen: FriendList, navigationOptions: {
+    FriendList: {screen: FriendList, navigationOptions: ({navigation}) => {
+      return {
       title: ``,
       headerTitle: ()=>{return <Text style={{alignContent: "center", color: "white", fontSize:24,fontWeight: "900"}}>Your Friends</Text>},
       headerStyle: {backgroundColor: "blue", borderColor: "white", borderBottomWidth: 2},
-    },},
+      headerRight: (
+      <TouchableHighlight onPress={navigation.navigate("FriendSearchView")}>
+        <Text>Search</Text>
+      </TouchableHighlight>
+      ),
+    }},
+  },
     RecipeView: {screen: RecipeView, navigationOptions: ({navigation}) => {
       return {
       headerTitle: ()=>{return <Text style={{alignContent: "center", color: "white", fontSize:24,fontWeight: "900"}}>{navigation.state.params.title}</Text>},
-      headerStyle: {backgroundColor: "blue", borderColor: "white", borderBottomWidth: 2},}
+      headerStyle: {backgroundColor: "blue", borderColor: "white", borderBottomWidth: 2},
+      headerRight: (
+        <TouchableHighlight onPress={navigation.getParam('toggleFavorite')}>
+          <FontAwesome style={{fontSize: 28, marginRight: 5}} name={navigation.getParam("isFavorite") ? "star" : "star-o"}/>
+        </TouchableHighlight>
+      ),
+  }
     },},
-    FriendView: {screen: FriendView, navigationOptions: {
+    FriendSearchView: {screen: FriendView, navigationOptions: {
       title: ``,
       headerTitle: ()=>{return <Text style={{alignContent: "center", color: "white", fontSize:24,fontWeight: "900"}}></Text>},
       headerStyle: {backgroundColor: "blue", borderColor: "white", borderBottomWidth: 2},

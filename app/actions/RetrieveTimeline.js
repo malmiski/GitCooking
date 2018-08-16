@@ -1,7 +1,11 @@
-export default function retrieveTimeline(){
+import { Auth, API, graphqlOperation } from "aws-amplify";
+import { getTimeline } from "../graphql-queries";
+
+export default function retrieveTimeline(id=""){
     // Thunk will place the dispatch variable here for us
     return (dispatch) =>{
             dispatch(notifyRetrieving());
+            /*
         //fetch(`https://jsonplaceholder.typicode.com/users`).
         new Promise(resolve => {resolve()}).
         // then(response => response.json(), error => console.log("wassup", error)).then( json => {
@@ -68,7 +72,15 @@ export default function retrieveTimeline(){
                 },]
             }));
         });
-
+        */
+       Auth.currentAuthenticatedUser()
+       .then(user =>{
+                API.graphql(graphqlOperation(getTimeline, {id:user.signInUserSession.idToken.payload.sub}))
+                .then(result => {
+                        dispatch(notifyDoneRetrieving(result.data.getUser.timeline));
+                    })
+                    .catch(err => err);
+                })
     }
 
 }
@@ -79,7 +91,7 @@ return {
 }
 }
 
-function notifyDoneRetrieving(json={}){
+function notifyDoneRetrieving(json=[]){
 return {
     type: "DONE_RETRIEVING_TIMELINE",
     timeline: json

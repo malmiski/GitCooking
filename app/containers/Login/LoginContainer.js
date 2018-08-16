@@ -15,7 +15,7 @@ class LoginContainer extends React.Component{
     }
     render(){
         const _this = this;
-        const LoginScreenNav = StackNavigator({
+        const LoginScreenNav = createStackNavigator({
             Home: {
               screen:  LoginOptionsScreen,
             },

@@ -1,7 +1,7 @@
 import { debugging, address } from "../debugging";
 import {API, graphqlOperation} from "aws-amplify";
 import {searchForRecipe} from "../graphql-queries";
-export default function searchRecipes(query=""){
+export default function searchFriends(query=""){
     // Thunk will place the dispatch variable here for us
     return (dispatch) =>{
             dispatch(notifyRetrieving());
@@ -33,7 +33,7 @@ export default function searchRecipes(query=""){
 
 function notifyRetrieving(){
 return {
-    type: "SEARCHING_FOR_RECIPES",
+    type: "SEARCHING_FOR_FRIENDS",
 }
 }
 

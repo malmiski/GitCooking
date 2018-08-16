@@ -50,7 +50,7 @@ export default function retrieveRecipeLog(id=""){
                             }
                             days[i] = currentOrganization;
                         }
-                        console.log(days);
+                        // console.log(days);
                         dispatch(notifyDoneRetrieving(days))
                     })
             })

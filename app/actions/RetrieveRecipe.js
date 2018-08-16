@@ -1,4 +1,4 @@
-import { graphqlOperation, API } from "../../node_modules/aws-amplify";
+import { graphqlOperation, API } from "aws-amplify";
 import { getRecipe } from "../graphql-queries";
 
 export default function retrieveRecipe(recipeID=100){

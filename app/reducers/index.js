@@ -14,4 +14,5 @@ import recommender_reducer from "./RecommendReducer";
 import rating_reducer from "./RatingReducer";
 import login_reducer from "./LoginReducer";
 import recipe_reducer from "./RecipeReducer";
-export default combineReducers({login_reducer, tab_reducer, home_reducer, profile_reducer, stuff_reducer, recipe_list_reducer, friend_list_reducer, search_reducer, top_recipe_reducer, recommender_reducer, new_recipe_reducer, recipe_reducer, timeline_reducer, recipe_log_reducer, rating_reducer});
+import search_friend_reducer from "./SearchFriendReducer";
+export default combineReducers({login_reducer, tab_reducer, home_reducer, profile_reducer, stuff_reducer, recipe_list_reducer, friend_list_reducer, search_reducer, top_recipe_reducer, search_friend_reducer, recommender_reducer, new_recipe_reducer, recipe_reducer, timeline_reducer, recipe_log_reducer, rating_reducer});

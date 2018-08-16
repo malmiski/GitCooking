@@ -6,7 +6,7 @@ import GetCookingRecipeLogScreen from "./GetCookingRecipeLogScreen";
 
 import GetCookingProfileScreen from "./GetCookingProfileScreen";
 import RecipeView from "./RecipeView";
-import FriendView from "./FriendView";
+import FriendSearchView from "./FriendSearchView";
 import React from "react";
 import RecipeList from "./RecipeList";
 import FriendList from "./FriendList";
@@ -71,7 +71,7 @@ navigators.DiscoverNav = createStackNavigator(
       ),
   }
     },},
-    FriendView: {screen: FriendView, navigationOptions: {
+    FriendSearchView: {screen: FriendSearchView, navigationOptions: {
       title: ``,
       headerTitle: ()=>{return <Text style={{alignContent: "center", color: "white", fontSize:24,fontWeight: "900"}}></Text>},
       headerStyle: {backgroundColor: "blue", borderColor: "white", borderBottomWidth: 2},
@@ -117,7 +117,7 @@ navigators.ProfileNav = createStackNavigator(
       headerTitle: ()=>{return <Text style={{alignContent: "center", color: "white", fontSize:24,fontWeight: "900"}}>Your Friends</Text>},
       headerStyle: {backgroundColor: "blue", borderColor: "white", borderBottomWidth: 2},
       headerRight: (
-      <TouchableHighlight onPress={navigation.navigate("FriendSearchView")}>
+      <TouchableHighlight onPress={()=>{navigation.navigate("FriendSearchView")}}>
         <Text>Search</Text>
       </TouchableHighlight>
       ),
@@ -134,9 +134,9 @@ navigators.ProfileNav = createStackNavigator(
       ),
   }
     },},
-    FriendSearchView: {screen: FriendView, navigationOptions: {
-      title: ``,
-      headerTitle: ()=>{return <Text style={{alignContent: "center", color: "white", fontSize:24,fontWeight: "900"}}></Text>},
+    FriendSearchView: {screen: FriendSearchView, navigationOptions: {
+      title: `Search for new Friends`,
+      headerTitle: ()=>{return <Text style={{alignContent: "center", color: "white", fontSize:24,fontWeight: "900"}}>Search for new Friends</Text>},
       headerStyle: {backgroundColor: "blue", borderColor: "white", borderBottomWidth: 2},
     },
   }

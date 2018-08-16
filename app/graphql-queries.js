@@ -73,6 +73,27 @@ export const updateFavorites = `
         }
     }
 `
+export const updateFriends = `
+mutation updateFriends($id: ID!, $friends: [ID!]!){
+    updateUser(input: {id: $id, friendIDs:$friends}){
+        friends{
+            id
+            name
+            profile_pic
+        }
+    }
+}
+`;
+
+export const searchForFriends = `
+    query search($query: String!, $id: String!){
+        searchFriends(query: $query, id: $id){
+            id
+            name
+            profile_pic
+        }
+    }
+`
   export const getProfile = `
     query getProfile($id: ID!){
         getUser(id: $id){
@@ -107,6 +128,7 @@ export const updateFavorites = `
                 instructions
             }
             friends{
+                id
                 name
                 profile_pic
             }

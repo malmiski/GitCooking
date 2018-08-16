@@ -20,6 +20,11 @@ export default function profile_reducer(state={retrieving: false, profile:{id:0,
         }else if(action.type === "TOGGLED_FAVORITE"){
             var profile = {...state.profile, favorite: action.favorites};
             state = {...state, togglingFavorite: false, profile}
+        }else if(action.type === "ADDING_FRIEND"){
+            state = {...state, addingFriend: true}
+        }else if(action.type === "ADDEDED_FRIEND"){
+            var profile = {...state.profile, friends: action.friends};
+            state = {...state, addingFriend: false, profile}
         }
         return state;
 }

@@ -56,7 +56,9 @@ class RecipeView extends React.Component{
         }
         if(this.updateBlink && !this.props.updatingReview){
             this.updateBlink = false;
-            this.setState({...this.state, message: {text:"Successfully saved", styles: ToastStyles.success}});
+            this.setState({...this.state, message: {text:"Successfully saved", styles: ToastStyles.success, onHide: ()=>{
+                this.setState({...this.state, message: null})
+            }}});
             this.props.getRecipe(this.props.navigation.state.params.id);
         }
         if(this.blink && !this.props.retrievingReview){

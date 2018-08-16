@@ -1,8 +1,6 @@
 import React from "react";
 import { StyleSheet, Text, View, StatusBar, Image, ScrollView, RefreshControl, FlatList, TouchableHighlight} from 'react-native';
 import { connect } from "react-redux";
-import {Entypo} from "@expo/vector-icons"
-import retrieveFriends from "../actions/RetrieveFriendList";
 import retrieveProfile from "../actions/RetrieveProfile";
 class FriendList extends React.Component{
     constructor(props){
@@ -10,14 +8,13 @@ class FriendList extends React.Component{
     }
     componentWillMount(){
         console.log(this.props.navigation.state.friends)
-        // this.props.onRefresh(this.props.screenProps.id)();
-        this.props.navigation.setParams({headerTitle: ()=>{return <Text style={{color: "black", fontWeight: "900"}}>My</Text>}});
+        this.props.navigation.setParams({headerTitle: ()=>{return <Text style={{color: "black", fontWeight: "900"}}>My Friends</Text>}});
     }
     render(){
         return (
             <FlatList
             ItemSeparatorComponent={() => {return <View style={{marginLeft:"14%", width: "86%", height: 1, backgroundColor: "#CED0CE", }} />}}
-            data={this.props.navigation.state.params.friends}
+            data={this.props.friends}
                 renderItem={({item}) => {
                     return (
                     <TouchableHighlight
@@ -34,6 +31,7 @@ class FriendList extends React.Component{
                     </TouchableHighlight>)}}
                 refreshing={this.props.retrieving}
                 onRefresh={this.props.onRefresh}
+                keyExtractor={(item)=>item.id}
             />
         );
 

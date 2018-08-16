@@ -58,7 +58,7 @@ class GetCookingProfileScreen extends React.Component {
                         */
                     }}>
                     <View style={{ alignItems: "center", margin: 10 }} >
-                        <Image source={{ uri: image == "" ? "https://pc-tablet.com/wp-content/uploads/2016/12/New-Year-2017-images-videos.jpg" : image }} style={{ width: 120, height: 120, borderRadius: 75, }} />
+                        <Image source={{ uri: image == "" ? "http://partnersinwealth.com.au/wp-content/uploads/2018/05/empty-profile-picture-woman.jpg" : image }} style={{ width: 120, height: 120, borderRadius: 75, }} />
                         <Text >{username}</Text>
                     </View>
                     </TouchableWithoutFeedback>
@@ -70,7 +70,7 @@ class GetCookingProfileScreen extends React.Component {
                         </View>
                         <View style={{ flexDirection: "row", }}>
                             <View style={{width: 200, height: 100 }}>
-                                <Button backgroundColor= "blue" onPress={()=>{this.props.navigation.navigate("FriendList", {friends: this.props.screenProps.profile.friends})}} title="Friends" style={{alignSelf: "stretch", width: 100, height: 100}}>Friends</Button>
+                                <Button backgroundColor= "blue" onPress={()=>{this.props.navigation.navigate("FriendList", {friends: this.props.profile.friends})}} title="Friends" style={{alignSelf: "stretch", width: 100, height: 100}}>Friends</Button>
                             </View>
                         </View>
                         <Button style={{borderRadius: 25}} backgroundColor= "blue" onPress={()=>{Auth.signOut().then(success => console.log(success))}} title="Log out" style={{alignSelf: "stretch", width: 100, height: 100}}>Log out</Button>

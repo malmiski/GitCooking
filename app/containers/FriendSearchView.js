@@ -55,6 +55,7 @@ import Toaster, { ToastStyles } from 'react-native-toaster';
                                 item.friended = true;
                                 this.setState({...this.state, message: {text: "Added friend", styles: ToastStyles.success, onHide: ()=>{
                                     this.setState({...this.state, message:null})
+                                    this.props.navigation.state.params.refresh();
                                 }}})
                             }
                         }

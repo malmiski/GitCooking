@@ -1,7 +1,7 @@
 import {Auth, API, graphqlOperation} from "aws-amplify";
 import { updateLogEntryForDay } from "../graphql-queries";
 // import {updteLog} from ""
-export default function updateLog(day, breakfast, lunch, dinner){
+export default function updateLog(day, breakfast, lunch, dinner, onFinish){
     return (dispatch) => {
         // Immediately update the log with the new stuff on the
         // front end, and notify that we are now currently updating
@@ -12,25 +12,31 @@ export default function updateLog(day, breakfast, lunch, dinner){
                     // If it is a success then we can just notify the UI that we
                     // have successfully updated the log entries
                     // TODO: Add error handling in the future
-                    dispatch(doneUpdating(result))
+                    dispatch(doneUpdating(result, day, breakfast, lunch, dinner))
+                    onFinish(day);
+            })
+            .catch(err =>{
+                console.log(err);
+                dispatch(doneUpdating(result, day, breakfast, lunch, dinner));
+                onFinish(day, err)
             })
     };
 }
 
 
-function notifyImmediateUpdate(day, breakfast, lunch, dinner){
+function notifyImmediateUpdate(){
     return {
         type: "UPDATING_LOG",
-        day,
-        breakfast,
-        lunch,
-        dinner,
     }
 }
 
 
-function doneUpdating(result){
+function doneUpdating(result, day, breakfast, lunch, dinner){
     return {
-            type: "UPDATED_LOG"
-    }
+            type: "UPDATED_LOG",
+            day,
+            breakfast,
+            lunch,
+            dinner,
+        }
 }

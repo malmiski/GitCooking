@@ -10,8 +10,7 @@ import FriendSearchView from "./FriendSearchView";
 import React from "react";
 import RecipeList from "./RecipeList";
 import FriendList from "./FriendList";
-import {Feather} from "@expo/vector-icons";
-import FontAwesome from '../../node_modules/@expo/vector-icons/FontAwesome';
+import {Ionicons, FontAwesome} from "@expo/vector-icons";
 const navigators = {};
 
 /**
@@ -117,8 +116,8 @@ navigators.ProfileNav = createStackNavigator(
       headerTitle: ()=>{return <Text style={{alignContent: "center", color: "white", fontSize:24,fontWeight: "900"}}>Your Friends</Text>},
       headerStyle: {backgroundColor: "blue", borderColor: "white", borderBottomWidth: 2},
       headerRight: (
-      <TouchableHighlight onPress={()=>{navigation.navigate("FriendSearchView")}}>
-        <Text>Search</Text>
+      <TouchableHighlight onPress={()=>{navigation.navigate("FriendSearchView", {refresh: navigation.getParam("refresh")})}}>
+          <Ionicons style={{fontSize: 28, marginRight: 10}} name={"ios-search"}/>
       </TouchableHighlight>
       ),
     }},
@@ -129,7 +128,7 @@ navigators.ProfileNav = createStackNavigator(
       headerStyle: {backgroundColor: "blue", borderColor: "white", borderBottomWidth: 2},
       headerRight: (
         <TouchableHighlight onPress={navigation.getParam('toggleFavorite')}>
-          <FontAwesome style={{fontSize: 28, marginRight: 5}} name={navigation.getParam("isFavorite") ? "star" : "star-o"}/>
+          <FontAwesome style={{fontSize: 28, marginRight: 10}} name={navigation.getParam("isFavorite") ? "star" : "star-o"}/>
         </TouchableHighlight>
       ),
   }

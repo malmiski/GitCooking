@@ -23,7 +23,7 @@ class GetCookingDiscoverScreen extends React.Component{
             console.log("Updating")
             var merged_log =         Object.keys(this.props.log)
             .reduce((r, e)=>{r.push(this.props.log[e].breakfast, this.props.log[e].lunch, this.props.log[e].dinner); return r}, []);
-            var filled_out_days = merged_log.filter((item) => item.contents.length > 0);
+            var filled_out_days = merged_log.filter((item) => item && item.contents && item.contents.length > 0);
             // Check the log to see if there are any entries
             // If there are then call the recommmendation reducer
             if(filled_out_days.length > 0){

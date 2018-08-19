@@ -28,13 +28,13 @@ class GetCookingHomeScreen extends React.Component{
                     var date = new Date(item.date);
                     return (
                     <View style={{ flexDirection: "row" }}>
-                        <Text style={{fontSize:  28, fontWeight: "900", width: 56}}> {(date.getMonth() + 1) + '/' + date.getDate()/*date.toLocaleDateString("en-US")*/} </Text>
+                        <Text style={{fontSize:  24, fontWeight: "900", width: 56}}> {(date.getMonth() + 1) + '/' + date.getDate()} </Text>
                         <View style={{width: 1, backgroundColor: "black"}}/>
                         <View>
                             <View>
                                 <Image source={{uri: item.user.profile_pic}} style={{ width: 40, height: 40, borderRadius: 20, }} />
                                 <Text> {item.user.name} </Text>
-                                <TouchableHighlight onPress={()=>this.props.navigation.navigate("RecipeView", {id: item.recipe.id, uri: item.pic, title: item.recipe.name})}>
+                                <TouchableHighlight onPress={()=>this.props.navigation.navigate("RecipeView", {id: item.recipe.id, uri: item.recipe.pic, title: item.recipe.name})}>
                                 <Card image={{uri: item.pic? item.pic : item.recipe.pic}}
                                         containerStyle={{padding: 0, width:280}}>
                                 <StarRating

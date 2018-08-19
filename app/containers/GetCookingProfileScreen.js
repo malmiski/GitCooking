@@ -93,7 +93,7 @@ class GetCookingProfileScreen extends React.Component {
                     var rating = item.stars;
                     return (
                     <View  key={item.id} style={{ flexDirection: "row" }}>
-                        <Text style={{fontSize:  28, fontWeight: "900", width: 56}}> {(date.getMonth() + 1) + '/' + date.getDate()} </Text>
+                        <Text style={{fontSize:  24, fontWeight: "900", width: 56}}> {(date.getMonth() + 1) + '/' + date.getDate()} </Text>
                         <View style={{width: 1, backgroundColor: "black"}}/>
                         <View>
                             <View style={{flexDirection: "row"}}>

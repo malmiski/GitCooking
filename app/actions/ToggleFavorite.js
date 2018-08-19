@@ -1,6 +1,6 @@
 import {Auth, API, graphqlOperation} from "aws-amplify";
 import { updateFavorites } from "../graphql-queries";
-export default function toggleFavorite(isFavorite, id, favorites){
+export default function toggleFavorite(isFavorite, id, favorites, refresh=null){
     return (dispatch) => {
         dispatch(notifyRetrieving());
         Auth.currentAuthenticatedUser()
@@ -17,6 +17,7 @@ export default function toggleFavorite(isFavorite, id, favorites){
             API.graphql(graphqlOperation(graphOperation, variables))
             .then(result => {
                 console.log(result);
+                if(refresh) refresh();
                 dispatch(done({favorites: result.data.updateUser.favorites}));
             })
             .catch(error => console.log(error))

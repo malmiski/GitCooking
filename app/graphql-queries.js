@@ -7,6 +7,7 @@ export const topRecipes = `
             ingredient{
               name
               cost
+              measurement
             }
             quantity
           }
@@ -26,6 +27,7 @@ export const getRecipe = `query GetRecipe($id:ID!){
           ingredient{
               name
               cost
+              measurement
           }
           quantity
       }
@@ -115,10 +117,12 @@ export const searchForFriends = `
                 date
             }
             userLog{
+                id
                 day
                 name
                 contents
                 cost
+                meal
             }
             favorites{
                 id

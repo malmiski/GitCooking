@@ -26,6 +26,7 @@ class RecipeView extends React.Component{
     }
     state={message: null, dirty: false, stars: this.props.review == null ? 0 : this.props.review.stars, text: (this.props.review == null || this.props.review.comment==null) ? "" : this.props.review.commment}
     componentWillMount(){
+        console.log(this.props.navigation.state.params);
         this.props.getRecipe(this.props.navigation.state.params.id);
         this.props.retrieveReview(this.props.navigation.state.params.id, this.props.userID);
     }
@@ -42,7 +43,9 @@ class RecipeView extends React.Component{
         })
         this.props.navigation.setParams({...this.props.navigation.state.params, 
             toggleFavorite: ()=>{
-                this.props.toggleFavorite(isFavorite, this.props.navigation.state.params.id, this.props.profile.favorites.map(e => e.id))
+                var refresh = this.props.navigation.state.params.refresh;
+                refresh = refresh ? refresh : null;
+                this.props.toggleFavorite(isFavorite, this.props.navigation.state.params.id, this.props.profile.favorites.map(e => e.id), refresh);
                 this.props.navigation.setParams({...this.props.navigation.state.params, isFavorite:!this.props.navigation.getParam("isFavorite")})
             }, 
             isFavorite})
@@ -96,7 +99,7 @@ class RecipeView extends React.Component{
                     {
                         ingredients.map((item) => {
                             return(
-                            <Text key={item} style={{fontSize: 20, color: "#233", marginBottom: 15}}>{item.quantity + " " + item.ingredient.name + (item.quantity > 1 ? 's' : '')}</Text>
+                            <Text key={item} style={{marginLeft: 5, fontSize: 20, color: "#233", marginBottom: 15}}>{item.quantity + " "+(item.ingredient.measurement=="unit"? "" : item.ingredient.measurement)+" " + item.ingredient.name + (item.quantity > 1 ? 's' : '')}</Text>
                             )
                         })
 
@@ -201,7 +204,9 @@ const mapDispatchToProps = (dispatch) =>{ return {
         updateRating: (review, isNew)=>{dispatch(updateRating(review, isNew))},
         getRecipe: (id) => {dispatch(retrieveRecipe(id))},
         retrieveReview: (recipeID, userID) => dispatch(retrieveReview(recipeID, userID)),
-        toggleFavorite: (isFavorite, id, favoriteIDs) => dispatch(toggleFavorite(isFavorite, id, favoriteIDs))
+        toggleFavorite: (isFavorite, id, favoriteIDs, refresh=null) => {
+                dispatch(toggleFavorite(isFavorite, id, favoriteIDs, refresh))
+        }
     }
 };
 

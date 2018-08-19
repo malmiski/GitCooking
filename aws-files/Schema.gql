@@ -1,0 +1,503 @@
+input CreateGoalInput {
+	userID: ID
+	finished: Boolean!
+	successful: Boolean!
+	numberRecipesMade: Int!
+	numberRecipesClaimed: Int!
+	startDate: String!
+	durationInDays: Int!
+}
+
+input CreateIngredientInput {
+	id: ID
+	name: String!
+	pic: String
+	cost: Float!
+	measurement: String!
+}
+
+input CreateLogEntryInput {
+	id: ID!
+	userID: ID!
+	day: Int!
+	contents: [String]!
+	cost: Float!
+	meal: MealType!
+	name: String!
+}
+
+input CreateRecipeInput {
+	id: ID
+	name: String!
+	ingredientIDs: [ID!]!
+	instructions: [String!]!
+	cost: Float!
+	pic: String!
+	tags: [String!]!
+}
+
+input CreateRecipeItemInput {
+	id: ID
+	ingredientID: ID!
+	quantity: Float
+	recipeID: ID
+}
+
+input CreateReviewInput {
+	id: ID
+	recipeID: ID!
+	userID: ID!
+	stars: Int!
+	date: String
+	comment: String
+	pic: String
+}
+
+input CreateUserInput {
+	id: ID!
+	username: String!
+	name: String!
+	email: String!
+	phone_number: String!
+	profile_pic: String
+	reviewIDs: [ID!]!
+	favoriteIDs: [ID!]!
+	userLogIDs: [ID!]!
+	friendIDs: [ID!]!
+}
+
+input DeleteGoalInput {
+	id: ID!
+}
+
+input DeleteIngredientInput {
+	id: ID!
+	cost: Float!
+}
+
+input DeleteLogEntryInput {
+	id: ID!
+}
+
+input DeleteRecipeInput {
+	id: ID!
+}
+
+input DeleteRecipeItemInput {
+	id: ID!
+	ingredientID: ID!
+}
+
+input DeleteReviewInput {
+	id: ID!
+}
+
+input DeleteUserInput {
+	id: ID!
+}
+
+type Goal {
+	id: ID!
+	userID: ID!
+	finished: Boolean!
+	successful: Boolean!
+	numberRecipesMade: Int!
+	numberRecipesClaimed: Int!
+	startDate: String!
+	durationInDays: Int!
+}
+
+type GoalConnection {
+	items: [Goal]
+	nextToken: String
+}
+
+type Ingredient {
+	id: ID!
+	name: String!
+	pic: String
+	cost: Float!
+	measurement: String!
+}
+
+type IngredientConnection {
+	items: [Ingredient]
+	nextToken: String
+}
+
+input IngredientInput {
+	id: ID!
+	name: String!
+	pic: String
+	cost: Int!
+}
+
+type LogEntry {
+	id: ID!
+	userID: ID!
+	day: Int!
+	contents: [String]!
+	cost: Float!
+	name: String!
+	meal: MealType!
+}
+
+type LogEntryConnection {
+	items: [LogEntry]
+	nextToken: String
+}
+
+enum MealType {
+	BREAKFAST
+	LUNCH
+	DINNER
+}
+
+type Mutation {
+	createIngredient(input: CreateIngredientInput!): Ingredient
+	updateIngredient(input: UpdateIngredientInput!): Ingredient
+	deleteIngredient(input: DeleteIngredientInput!): Ingredient
+	createRecipeItem(input: CreateRecipeItemInput!): RecipeItem
+	updateRecipeItem(input: UpdateRecipeItemInput!): RecipeItem
+	deleteRecipeItem(input: DeleteRecipeItemInput!): RecipeItem
+	createRecipe(input: CreateRecipeInput!): Recipe
+	updateRecipe(input: UpdateRecipeInput!): Recipe
+	deleteRecipe(input: DeleteRecipeInput!): Recipe
+	createReview(input: CreateReviewInput!): Review
+	updateReview(input: UpdateReviewInput!): Review
+	deleteReview(input: DeleteReviewInput!): Review
+	createLogEntry(input: CreateLogEntryInput!): LogEntry
+	updateLogEntry(input: UpdateLogEntryInput!): LogEntry
+	deleteLogEntry(input: DeleteLogEntryInput!): LogEntry
+	createUser(input: CreateUserInput!): User
+	updateUser(input: UpdateUserInput!): User
+	deleteUser(input: DeleteUserInput!): User
+	addReview(userID: ID!, reviewID: ID!): User
+	removeReview(userID: ID!, reviewID: ID!): User
+	createGoal(input: CreateGoalInput!): Goal
+	updateGoal(input: UpdateGoalInput!): Goal
+	deleteGoal(input: DeleteGoalInput!): Goal
+}
+
+type Query {
+	getIngredient(id: ID!, cost: Float!): Ingredient
+	listIngredients(first: Int, after: String): IngredientConnection
+	getRecipeItem(id: ID!, ingredientID: ID!): RecipeItem
+	listRecipeItems(first: Int, after: String): RecipeItemConnection
+	searchFriends(query: String!, id: String!): [User!]!
+	getRecipe(id: ID!): Recipe
+	listRecipes(first: Int, after: String): RecipeConnection
+	search(query: String!): [Recipe!]!
+	searchByRating(query: String!, minRating: Float!, maxRating: Float!): [Recipe!]!
+	getReview(id: ID!): Review
+	getReviewByRecipeUser(recipeID: ID!, userID: ID!): Review
+	listReviews(first: Int, after: String): ReviewConnection
+	getLogEntry(id: ID!): LogEntry
+	listLogEntries(first: Int, after: String): LogEntryConnection
+	getUser(id: ID!): User
+	listUsers(first: Int, after: String): UserConnection
+	getGoal(id: ID!): Goal
+	listGoals(filter: TableGoalFilterInput, limit: Int, nextToken: String): GoalConnection
+	queryGoalsByUserIDStartDate(userID: ID!, first: Int, after: String): GoalConnection
+}
+
+type Recipe {
+	id: ID!
+	name: String!
+	ingredientIDs: [ID!]!
+	ingredients: [RecipeItem!]!
+	instructions: [String!]!
+	reviews: [Review!]!
+	cost: Float!
+	pic: String
+	stars: Float
+	tags: [String!]!
+}
+
+type RecipeConnection {
+	items: [Recipe]
+	nextToken: String
+}
+
+type RecipeItem {
+	id: ID!
+	ingredientID: ID!
+	ingredient: Ingredient!
+	quantity: Float
+	recipeID: ID
+}
+
+type RecipeItemConnection {
+	items: [RecipeItem]
+	nextToken: String
+}
+
+type Review {
+	id: ID!
+	recipeID: ID!
+	recipe: Recipe!
+	userID: ID!
+	user: User!
+	stars: Int!
+	date: String!
+	comment: String
+	pic: String
+}
+
+type ReviewConnection {
+	items: [Review]
+	nextToken: String
+}
+
+type Subscription {
+	onDeleteRecipe(
+		id: ID,
+		name: String,
+		ingredientIDs: [ID!],
+		instructions: [String!],
+		cost: Float
+	): Recipe
+		@aws_subscribe(mutations: ["deleteRecipe"])
+	onCreateReview(
+		id: ID,
+		recipeID: ID,
+		userID: ID,
+		stars: Int,
+		pic: String
+	): Review
+		@aws_subscribe(mutations: ["createReview"])
+	onUpdateReview(
+		id: ID,
+		recipeID: ID,
+		userID: ID,
+		stars: Int,
+		pic: String
+	): Review
+		@aws_subscribe(mutations: ["updateReview"])
+	onDeleteReview(
+		id: ID,
+		recipeID: ID,
+		userID: ID,
+		stars: Int,
+		pic: String
+	): Review
+		@aws_subscribe(mutations: ["deleteReview"])
+	onCreateLogEntry(id: ID, day: Int, contents: String): LogEntry
+		@aws_subscribe(mutations: ["createLogEntry"])
+	onUpdateLogEntry(id: ID, day: Int, contents: String): LogEntry
+		@aws_subscribe(mutations: ["updateLogEntry"])
+	onDeleteLogEntry(id: ID, day: Int, contents: String): LogEntry
+		@aws_subscribe(mutations: ["deleteLogEntry"])
+	onCreateUser(
+		id: ID,
+		username: String,
+		name: String,
+		email: String,
+		phone_number: String
+	): User
+		@aws_subscribe(mutations: ["createUser"])
+	onUpdateUser(
+		id: ID,
+		username: String,
+		name: String,
+		email: String,
+		phone_number: String
+	): User
+		@aws_subscribe(mutations: ["updateUser"])
+	onDeleteUser(
+		id: ID,
+		username: String,
+		name: String,
+		email: String,
+		phone_number: String
+	): User
+		@aws_subscribe(mutations: ["deleteUser"])
+	onCreateGoal(
+		id: ID,
+		userID: ID,
+		finished: Boolean,
+		successful: Boolean,
+		numberRecipesMade: Int
+	): Goal
+		@aws_subscribe(mutations: ["createGoal"])
+	onUpdateGoal(
+		id: ID,
+		userID: ID,
+		finished: Boolean,
+		successful: Boolean,
+		numberRecipesMade: Int
+	): Goal
+		@aws_subscribe(mutations: ["updateGoal"])
+	onDeleteGoal(
+		id: ID,
+		userID: ID,
+		finished: Boolean,
+		successful: Boolean,
+		numberRecipesMade: Int
+	): Goal
+		@aws_subscribe(mutations: ["deleteGoal"])
+}
+
+input TableBooleanFilterInput {
+	ne: Boolean
+	eq: Boolean
+}
+
+input TableFloatFilterInput {
+	ne: Float
+	eq: Float
+	le: Float
+	lt: Float
+	ge: Float
+	gt: Float
+	contains: Float
+	notContains: Float
+	between: [Float]
+}
+
+input TableGoalFilterInput {
+	id: TableIDFilterInput
+	userID: TableIDFilterInput
+	finished: TableBooleanFilterInput
+	successful: TableBooleanFilterInput
+	numberRecipesMade: TableIntFilterInput
+	numberRecipesClaimed: TableIntFilterInput
+	startDate: TableStringFilterInput
+	durationInDays: TableIntFilterInput
+}
+
+input TableIDFilterInput {
+	ne: ID
+	eq: ID
+	le: ID
+	lt: ID
+	ge: ID
+	gt: ID
+	contains: ID
+	notContains: ID
+	between: [ID]
+	beginsWith: ID
+}
+
+input TableIntFilterInput {
+	ne: Int
+	eq: Int
+	le: Int
+	lt: Int
+	ge: Int
+	gt: Int
+	contains: Int
+	notContains: Int
+	between: [Int]
+}
+
+input TableStringFilterInput {
+	ne: String
+	eq: String
+	le: String
+	lt: String
+	ge: String
+	gt: String
+	contains: String
+	notContains: String
+	between: [String]
+	beginsWith: String
+}
+
+input UpdateGoalInput {
+	id: ID!
+	userID: ID
+	finished: Boolean
+	successful: Boolean
+	numberRecipesMade: Int
+	numberRecipesClaimed: Int
+	startDate: String
+	durationInDays: Int
+}
+
+input UpdateIngredientInput {
+	id: ID!
+	name: String
+	pic: String
+	cost: Float!
+}
+
+input UpdateLogEntryInput {
+	id: ID!
+	userID: ID!
+	day: Int!
+	contents: [String]!
+	cost: Float!
+	name: String!
+	meal: MealType!
+}
+
+input UpdateRecipeInput {
+	id: ID!
+	name: String
+	ingredientIDs: [ID!]
+	instructions: [String!]
+	tags: [String!]!
+	reviewIDs: [ID!]!
+	cost: Float!
+	pic: String
+}
+
+input UpdateRecipeItemInput {
+	id: ID!
+	ingredientID: ID!
+	quantity: String
+}
+
+input UpdateReviewInput {
+	id: ID!
+	recipeID: ID
+	userID: ID
+	stars: Int
+	date: String
+	comment: String
+	pic: String
+}
+
+input UpdateUserInput {
+	id: ID!
+	username: String
+	name: String
+	email: String
+	phone_number: String
+	profile_pic: String
+	reviewIDs: [ID!]
+	favoriteIDs: [ID!]
+	userLogIDs: [ID!]
+	friendIDs: [ID!]
+}
+
+type User {
+	id: ID!
+	username: String!
+	name: String!
+	email: String!
+	phone_number: String!
+	profile_pic: String
+	reviewIDs: [ID!]!
+	favoriteIDs: [ID!]!
+	userLogIDs: [ID!]!
+	friendIDs: [ID!]!
+	reviews: [Review!]!
+	favorites: [Recipe!]!
+	userLog: [LogEntry!]!
+	friends: [User!]!
+	timeline: [Review!]!
+	goals: [Goal!]!
+}
+
+type UserConnection {
+	items: [User]
+	nextToken: String
+}
+
+schema {
+	query: Query
+	mutation: Mutation
+	subscription: Subscription
+}

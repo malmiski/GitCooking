@@ -14,9 +14,10 @@ export default function searchFriends(query="", friendList=[]){
                         e.friended = friends.indexOf(e.id) >= 0;
                         return e;
                     })
-
+                    
                     dispatch(notifyDoneRetrieving(friendsFound));
                 })
+                .catch(err => console.log(err));
             });
     }
 }

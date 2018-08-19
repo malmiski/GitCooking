@@ -47,15 +47,17 @@ function buildGraphQLQuery(contentTags){
     // at once using the content tags
     if(contentTags === undefined || contentTags.length == 0)
         return '';
-    var query = `query search($query1: String!,`
+    var query = `query search($query1: String!`
     for(var i = 2; i<=contentTags.length; i++){
         if(i != contentTags.length){
-            query += ` $query${i} : String!,`
+            query += `, $query${i} : String!,`
         }else{
-            query += ` $query${i}: String!){\n`
+            query += `, $query${i}: String!){\n`
         }
     }
-
+    if(contentTags.length == 1){
+        query += "){\n";
+    }
     for(var i = 1; i<=contentTags.length; i++){
         query += `_${i}: search(query: $query${i}){
             id

@@ -8,7 +8,7 @@ class FriendList extends React.Component{
     }
     componentWillMount(){
         console.log(this.props.navigation.state.friends)
-        this.props.navigation.setParams({headerTitle: ()=>{return <Text style={{color: "black", fontWeight: "900"}}>My Friends</Text>}});
+        this.props.navigation.setParams({headerTitle: ()=>{return <Text style={{color: "black", fontWeight: "900"}}>My Friends</Text>}, refresh: this.props.onRefresh});
     }
     render(){
         return (

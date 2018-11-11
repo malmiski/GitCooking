@@ -17,7 +17,8 @@ There are many other recipe apps on the market. However, these are often recipe 
 ![](img/screenshot_recipe.jpg)
 ![](img/screenshot_search.jpg)
 
-Mohanad Almiski
+# Information
+Created by Mohanad Almiski
 
 An application I helped to create in CS 321
 

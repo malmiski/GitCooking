@@ -17,16 +17,9 @@ There are many other recipe apps on the market. However, these are often recipe 
 need to add
 ```
 
-## The Team
-
 Mohanad Almiski
 
-Layanne Hazim
-
-Sean Scott
-
-=======
-An application I helped to create in CS321
+An application I helped to create in CS 321
 
 ## Install Instructions
 First clone the repository from this page:

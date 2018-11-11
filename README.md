@@ -13,9 +13,9 @@ There are many other recipe apps on the market. However, these are often recipe 
 
 ## Screens
 
-```
-need to add
-```
+![](img/screenshot_home.jpg)
+![](img/screenshot_recipe.jpg)
+![](img/screenshot_search.jpg)
 
 Mohanad Almiski
 
